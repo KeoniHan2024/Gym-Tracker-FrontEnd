@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "aws-amplify": "^6.13.4",
     "bootstrap": "^5.2.3",
     "express": "^4.21.2",
     "react": "^18.2.0",
@@ -16,10 +17,17 @@
     "react-router-dom": "^7.3.0"
   },
   "devDependencies": {
+    "@aws-amplify/backend": "^1.14.2",
+    "@aws-amplify/backend-cli": "^1.4.12",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^3.1.0",
-    "typescript": "^4.9.3",
+    "aws-cdk": "^2.1000.2",
+    "aws-cdk-lib": "^2.180.0",
+    "constructs": "^10.4.2",
+    "esbuild": "^0.25.0",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2",
     "vite": "^4.1.0"
   }
 }
