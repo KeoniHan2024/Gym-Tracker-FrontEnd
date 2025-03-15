@@ -1,19 +1,26 @@
-import ListGroup from "./components/ListGroup";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from './pages/Home';
+import Home from "./pages/Home";
+import Signup from "./pages/Signup";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../scss/colors.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';  // This includes Popper.js
+import '../scss/components.css';
+import '../scss/main.css';
+
 
 function App() {
-  return <div>
+  return (
+    <div>
       <BrowserRouter>
         <Routes>
-          <Route index element = {<Home/>} />
-          <Route path= "/home" element = {<Home/>} />
-          <Route path= "/login" element = {<Home/>} />
-          <Route path= "/signup" element = {<Home/>} />
-
+          <Route index element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/login" element={<Home />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
       </BrowserRouter>
-  </div>
+    </div>
+  );
 }
 
 export default App;

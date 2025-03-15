@@ -1,0 +1,112 @@
+@import 'colors.scss';  // Importing the colors.scss file
+
+.container-custom {
+    width: 100%;
+    padding: 0 2rem;
+    margin: 0 auto;
+}
+
+@media (min-width: 1200px){
+    .container-custom {
+        width: 1140px;
+    }
+}
+
+@media (min-width: 1400px){
+    .container-custom {
+        width: 1340px;
+    }
+}
+
+@media (min-width: 1600px){
+    .container-custom {
+        width: 1520px;
+    }
+}
+
+
+.header-container {
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+}
+
+
+
+
+
+.hero-container {
+    position: relative;
+    height: 100vh;
+    background-color: $primary;  
+    overflow: hidden;
+}
+
+@media (min-width: 1400px) {
+    .hero-container__heading {
+        font-size: 3.2rem;
+    }
+}
+
+.hero-container_img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 50%;
+    min-height: 50%;
+    width: auto;
+    height: auto;
+    transform: translateX(-50%) translateY(-50%);
+    object-fit: cover;
+}
+
+.hero-container__overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $primary;
+    opacity: 50%;
+    z-index: 1;
+}
+
+.hero-container__content {
+    z-index: 1;
+}
+
+.hero__content-width {
+    max-width: 540px;
+}
+
+.hero-container__scroll-btn {
+    position: absolute;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    color: $white;
+    display: flex;
+    z-index: 1;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+}
+
+.hero-container__scroll-btn:hover{
+    color: $white;
+    opacity: 0.8;
+}
+
+.hero-container__scroll-btn .downArrow {
+    transition-delay: 0.8s;
+    animation: bounce 1s infinite alternate;
+}
+
+@keyframes bounce {
+    from {
+        transform: translateY(0px);
+    }
+    to {
+        transform: translateY(-5px);
+    }
+}
