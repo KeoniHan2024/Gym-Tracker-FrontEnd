@@ -3,11 +3,11 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 
 
-function Header( {showNav }: {showNav:boolean} ) {
+function Header( {showNav, textColor }: {showNav:boolean, textColor:string} ) {
   return (
     <>
     <div className="header-container">
-        <nav className="navbar navbar-expand-lg bg-transparent text-white" >
+        <nav className={`navbar navbar-expand-lg bg-transparent text-${textColor}`} >
           <div className="container-fluid">
             <a className="navbar-brand text-reset" href="/">M<span className="fs-6">uscle</span>M<span className="fs-6">ap</span></a>
 

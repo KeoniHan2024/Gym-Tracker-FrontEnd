@@ -4,7 +4,7 @@ import Hero from "../components/Hero";
 function HomeScreen() {
   return (
     <>
-      <Header showNav={true}></Header>
+      <Header showNav={false} textColor="white"></Header>
       <Hero></Hero>
     </>
   );

@@ -15,7 +15,9 @@
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "aws-amplify": "^6.13.4",
+    "axios": "^1.8.3",
     "bootstrap": "^5.3.3",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -24,6 +26,7 @@
   "devDependencies": {
     "@aws-amplify/backend": "^1.14.2",
     "@aws-amplify/backend-cli": "^1.4.12",
+    "@types/node": "^22.13.10",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^3.1.0",
