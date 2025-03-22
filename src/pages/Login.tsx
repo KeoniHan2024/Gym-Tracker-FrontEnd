@@ -19,8 +19,8 @@ function Login(){
         .then(response => {
             const { token, user} = response.data;
             localStorage.setItem("token", token);
-            console.log("User Logged in", user);
-            navigate('/'); //TODO - CHANGE TO DASHBOARD WITH USER STATS (Protected Route)
+            // console.log("User Logged in", user);
+            navigate('/Dashboard'); //TODO - CHANGE TO DASHBOARD WITH USER STATS (Protected Route)
         })
         .catch(err => {
             console.log("error");
@@ -30,7 +30,7 @@ function Login(){
 
     return(
        <>
-           <Header showNav={false} textColor={"black"}/>
+           <Header showNav={false} textColor={"black"} loggedIn={false}/>
                 <div className="container d-flex flex-column justify-content-center align-items-center vh-100">
                         <div className="col-md-6 p-4 shadow rounded bg-light">
                             <form onSubmit={handleSubmit}>

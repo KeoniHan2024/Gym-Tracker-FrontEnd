@@ -3,7 +3,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 
 
-function Header( {showNav, textColor }: {showNav:boolean, textColor:string} ) {
+function Header( {showNav, textColor, loggedIn }: {showNav:boolean, textColor:string, loggedIn: boolean} ) {
   return (
     <>
     <div className="header-container">
@@ -13,7 +13,7 @@ function Header( {showNav, textColor }: {showNav:boolean, textColor:string} ) {
 
              {/* Mobile Navigation Toggle - Only visible on mobile */}
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <FontAwesomeIcon icon={faBars} style={{color: "#ffffff",}} />
+              <FontAwesomeIcon icon={faBars} style={{color: `${textColor}`}} />
             </button>
 
             {/* Dropdown and Navigation Links - Visible on both mobile and desktop */}
@@ -23,9 +23,15 @@ function Header( {showNav, textColor }: {showNav:boolean, textColor:string} ) {
                   <a className="nav-link active  text-reset" aria-current="page" href="#">Home</a>
                 </li> */}
                 <li className="nav-item">
-                  <a className="nav-link  text-reset" href="#">Link</a>
+                  <a className="nav-link  text-reset" href="/Sets">Sets</a>
                 </li>
-                <li className="nav-item dropdown">
+                <li className="nav-item">
+                  <a className="nav-link  text-reset" href="/Exercises">Exercises</a>
+                </li>
+                  {loggedIn && <li className="nav-item">
+                  <a className="nav-link text-reset" href="/logout">Logout</a>
+                </li>}
+                {/* <li className="nav-item dropdown">
                   <a className="nav-link dropdown-toggle text-reset" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Dropdown
                   </a>
@@ -35,9 +41,11 @@ function Header( {showNav, textColor }: {showNav:boolean, textColor:string} ) {
                     <li><hr className="dropdown-divider"/></li>
                     <li><a className="dropdown-item text-reset" href="#">Something else here</a></li>
                   </ul>
-                </li>
+                </li> */}
               </ul>
             </div>}
+            
+              
           </div>
         </nav>
         </div>

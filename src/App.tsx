@@ -1,7 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ProtectedRoute from "./utils/ProtectedRoute";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import Dashboard from "./pages/protected/Dashboard";
+import AddSet from "./pages/protected/AddSet"
+import Exercises from "./pages/protected/Exercises"
+import Logout from "./pages/protected/Logout" 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../scss/colors.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';  // This includes Popper.js
@@ -20,6 +25,12 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/Dashboard" element={<Dashboard />} />
+            <Route path="/Sets" element={<AddSet />} />
+            <Route path="/Exercises" element={<Exercises />} />
+            <Route path="/Logout" element={<Logout />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>

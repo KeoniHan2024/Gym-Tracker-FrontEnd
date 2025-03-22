@@ -34,7 +34,7 @@ function Signup() {
 
     return (
         <>
-            <Header showNav={false} textColor={"black"}/>
+            <Header showNav={false} textColor={"black"} loggedIn={false}/>
             <div className="container d-flex flex-column justify-content-center align-items-center vh-100">
                     <div className="col-md-6 p-4 shadow rounded bg-light">
                         <form onSubmit={handleSubmit}>
@@ -58,7 +58,7 @@ function Signup() {
                     </div>
                     <div className="col-md-6 text-center py-4">
                         <p>Already have an account? <a href="/login">Login here</a></p> 
-                </div>
+                    </div>
             </div>
 
            
