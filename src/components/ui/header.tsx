@@ -9,7 +9,9 @@ function Header( {showNav, textColor, loggedIn }: {showNav:boolean, textColor:st
     <div className="header-container">
         <nav className={`navbar navbar-expand-lg bg-transparent text-${textColor}`} >
           <div className="container-fluid">
-            <a className="navbar-brand text-reset" href="/">M<span className="fs-6">uscle</span>M<span className="fs-6">ap</span></a>
+            {/* {if logged in then the logo goes to dashboard. if not logged in it goes to home page with hero on it} */}
+            {!loggedIn && <a className="navbar-brand text-reset" href="/">M<span className="fs-6">uscle</span>M<span className="fs-6">ap</span></a>}
+            {loggedIn && <a className="navbar-brand text-reset" href="/Dashboard">M<span className="fs-6">uscle</span>M<span className="fs-6">ap</span></a>}
 
              {/* Mobile Navigation Toggle - Only visible on mobile */}
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
