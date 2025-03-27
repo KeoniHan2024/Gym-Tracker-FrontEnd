@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import Header from "../../components/ui/header";
 import axios from 'axios';
-import { FormEvent } from "../../types";
+import { buttonEvent, FormEvent, InputChangeEvent } from "../../types";
+import { fetchMuscleGroups } from "../../services/ExercisesServices";
+import { useFuzzySearchList, Highlight } from '@nozbe/microfuzz/react';
 
 // Define the Exercise interface
 interface Exercise {
@@ -15,18 +17,67 @@ function Exercises() {
     const token = localStorage.getItem("token");
     
     const [exercises, setExercises] = useState<Exercise[]>([]); // keeps track of exercises from the user and the default one
+    const [newExercises, setNewExercises] = useState(0); // keeps track of newexercises added. if new one is added it will re render the list
+    const [muscleGroups, setMuscleGroups] = useState<Musclegroup[]>([]); // gets the list of muscle groups when component is mounted so that the fuzzy search can work on this 
+    const [searchQuery, setSearchQuery] = useState('');
+    const [filteredMuscleGroups, setFilteredMuscleGroups] = useState<any[]>([]);
 
-    const[newExercises, setNewExercises] = useState(0); // keeps track of newexercises added. if new one is added it will re render the list
+    
+    let filteredList = useFuzzySearchList({
+        list: muscleGroups,
+        queryText: searchQuery,
+        getText: (item) => [item.name],
+        mapResultItem: ({ item, score, matches: [highlightRanges] }) => ({ item, highlightRanges })
+    });
+
+
+    // get all muscle groups when its loaded
+    useEffect(() => {
+        const getMuscleGroups = async () => {
+            const data: Musclegroup[] = await fetchMuscleGroups();
+            // const muscleGroupsList: any[] = JSON.parse(data);
+            setMuscleGroups(data)
+        }
+        getMuscleGroups();
+    }, [])
+
+
+
+    const handleSearchChange = (event: InputChangeEvent) => {
+        const query = event.target.value;
+        setSearchQuery(query)
+        if (query.length == 0) {
+            filteredList = []
+        }
+        setFilteredMuscleGroups(filteredList.splice(0,4))
+
+        //if query is in the musclegroup list then set selected muscle to that 
+
+        // if not then leave selected muscle as blank
+
+
+    }
+
+    function handleMuscleSelection(selectedExercise:Exercise) {
+        setSearchQuery(selectedExercise.exercise_name)
+        setFilteredMuscleGroups([])
+    }
+
+    
 
     // function to call backend and create a new exercise
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
         const formData = new FormData(event.target as HTMLFormElement);
         const payload = Object.fromEntries(formData);
+
+
+        const foundMuscle = muscleGroups.find(item => item.name.toLowerCase() === searchQuery.toLowerCase())
+
         axios.post("http://localhost:8080/exercises/createExercise", 
             {
-                exercise_name: payload.exerciseName,
-                muscleGroup: payload.muscleGroup
+                exercise_name: payload?.exerciseName,
+                muscleGroup: foundMuscle?.id
             },
             {
             headers: {Authorization: `Bearer ${token}`}
@@ -47,6 +98,8 @@ function Exercises() {
         })
 
     }
+
+   
 
 
     // update exercise list everytime a new exercise is added 
@@ -84,8 +137,14 @@ function Exercises() {
                         <input type="text" className="form-control" name="exerciseName" id="exerciseNameField"placeholder="Enter Exercise Name"/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="muscleGroupsField">Mucle Groups</label>
-                        <input type="text" name="muscleGroup" className="form-control" id="muscleGroupsField" placeholder="Add Muscle Groups"/>
+                        <label htmlFor="muscleGroupsField">Muscle Groups</label>
+                        <input type="text" name="muscleGroup" className="form-control" id="muscleGroupsField" placeholder="Add Muscle Group" value={searchQuery} onChange={handleSearchChange}/>
+                        <ul className="list-group">
+                            {
+                            filteredMuscleGroups.map((muscleGroup) => (
+                                <button type="button" className="list-group-item list-group-item-action" onClick={() => handleMuscleSelection({id: muscleGroup.item.id, exercise_name: muscleGroup.item.name})} key={muscleGroup.item.id}>{muscleGroup.item.name}</button>
+                            ))}
+                        </ul>
                     </div>
                     <div className="d-flex justify-content-center py-3">  
                         <button type="submit" className="btn btn-primary center px-3">Create</button>

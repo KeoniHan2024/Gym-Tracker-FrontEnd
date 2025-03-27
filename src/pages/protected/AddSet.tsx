@@ -14,12 +14,14 @@ function Dashboard() {
                     <div className="form-group">
                         <h2>Add Set</h2>
                         {/* {errorMessage && <div className="alert alert-danger">{errorMessage}</div>} */}
-                        <label htmlFor="exampleInputEmail1">Email address</label>
-                        <input type="email" className="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email"/>
+                        <label htmlFor="exerciseNameField">Exercise</label>
+                        <input type="text" className="form-control" name="exerciseName" id="exerciseNameField" aria-describedby="emailHelp" placeholder="Enter Exercise"/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="exampleInputPassword1">Password</label>
-                        <input type="password" name="password" className="form-control" id="exampleInputPassword1" placeholder="Password"/>
+                        <label htmlFor="weightField">Weight</label>
+                        <input type="number" name="weight" className="form-control" id="weightField" placeholder="Weight"/>
+                        <label htmlFor="repsField">Reps</label>
+                        <input type="number" name="reps" className="form-control" id="repsField" placeholder="Reps"/>
                     </div>
                     <div className="d-flex justify-content-center py-3">  
                         <button type="submit" className="btn btn-primary center px-3">Submit</button>
