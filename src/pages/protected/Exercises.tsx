@@ -42,7 +42,7 @@ function Exercises() {
     }, [])
 
 
-
+    // whenever the muscle group field is changed it will do a fuzzy search. and if 0 then reset the list to empty
     const handleSearchChange = (event: InputChangeEvent) => {
         const query = event.target.value;
         setSearchQuery(query)
@@ -54,8 +54,6 @@ function Exercises() {
         //if query is in the musclegroup list then set selected muscle to that 
 
         // if not then leave selected muscle as blank
-
-
     }
 
     function handleMuscleSelection(selectedExercise:Exercise) {
@@ -136,10 +134,10 @@ function Exercises() {
                         <label htmlFor="exerciseNameField">Exercise Name</label>
                         <input type="text" className="form-control" name="exerciseName" id="exerciseNameField"placeholder="Enter Exercise Name"/>
                     </div>
-                    <div className="form-group">
+                    <div className="form-group" style={{ position: 'relative' }}>
                         <label htmlFor="muscleGroupsField">Muscle Groups</label>
                         <input type="text" name="muscleGroup" className="form-control" id="muscleGroupsField" placeholder="Add Muscle Group" value={searchQuery} onChange={handleSearchChange}/>
-                        <ul className="list-group">
+                        <ul className="list-group" style={{ position: 'absolute', width: '100%'}}>
                             {
                             filteredMuscleGroups.map((muscleGroup) => (
                                 <button type="button" className="list-group-item list-group-item-action" onClick={() => handleMuscleSelection({id: muscleGroup.item.id, exercise_name: muscleGroup.item.name})} key={muscleGroup.item.id}>{muscleGroup.item.name}</button>
