@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Dashboard from "./pages/protected/Dashboard";
-import AddSet from "./pages/protected/AddSet"
+import AddSet from "./pages/protected/Sets"
 import Exercises from "./pages/protected/Exercises"
 import Logout from "./pages/protected/Logout" 
 import 'bootstrap/dist/css/bootstrap.min.css';
