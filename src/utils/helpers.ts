@@ -9,3 +9,7 @@ function convertToHHMMSS(totalSeconds:number ){
     const seconds = totalSeconds % 60;
     return { hours, minutes, seconds };
 }
+
+export function isTokenExpired(token:string) {
+
+}

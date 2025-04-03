@@ -1,8 +1,9 @@
 import Header from "../components/ui/header";
 import axios from "axios";
 import { FormEvent } from "../types";
-import { useNavigate } from 'react-router-dom';
-import { useState } from "react";
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useState, useEffect } from "react";
+
 
 
 function Login(){
@@ -15,7 +16,6 @@ function Login(){
         const formData = new FormData(event.target as HTMLFormElement);
         const payload = Object.fromEntries(formData);
         
-
         axios.post(import.meta.env.VITE_APP_API_URL?.concat("/users/login"), payload)
         .then(response => {
             const { token, user} = response.data;
@@ -28,6 +28,16 @@ function Login(){
             setErrorMessage("Login Failed");
         })
     }
+
+    const location = useLocation();
+        const passedData = location.state;
+        
+
+    useEffect(() => {
+        if (passedData) {
+            setErrorMessage(passedData)
+        }
+        }, [passedData]);
 
     return(
        <>

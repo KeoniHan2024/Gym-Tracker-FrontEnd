@@ -4,13 +4,14 @@ import axios from 'axios';
 import { buttonEvent, FormEvent, InputChangeEvent } from "../../types";
 import { fetchMuscleGroups, handleExerciseSubmit } from "../../services/ExercisesServices";
 import { useFuzzySearchList, Highlight } from '@nozbe/microfuzz/react';
+import { useNavigate } from 'react-router-dom';
 
 
 
 function Exercises() {
     // user's logged in token
     const token = localStorage.getItem("token") as string;
-    
+    const navigate = useNavigate();
     const [exercises, setExercises] = useState<Exercise[]>([]); // keeps track of exercises from the user and the default one
     const [newExercises, setNewExercises] = useState(0); // keeps track of newexercises added. if new one is added it will re render the list
     const [muscleGroups, setMuscleGroups] = useState<Musclegroup[]>([]); // gets the list of muscle groups when component is mounted so that the fuzzy search can work on this 
@@ -62,21 +63,15 @@ function Exercises() {
     const API_GET_EXERCISES = (import.meta.env.VITE_APP_API_URL?.concat("/exercises/")) as string
     
     useEffect(() => {
-        console.log("API TO GET ALL EXERCISES: " + API_GET_EXERCISES)
+
         axios.get(API_GET_EXERCISES, {
             headers: {Authorization: `Bearer ${token}`}
         }).then((response) => {
             setExercises(response.data);
 
-        }).catch(err => {
-            if (err.response) {
-                if (err.response.status === 409) {
-                    console.log("Error");
-                }
-                else {
-                    console.log("Error");
-                }
-            }
+        }).catch(err => {  
+            localStorage.removeItem("token")
+            navigate("/login", { state: "Login Session has expired" })
         })
     }, [newExercises])
 
