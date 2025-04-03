@@ -15,6 +15,7 @@ function Dashboard() {
     const [exerciseList, setExerciseList] = useState<Exercise[]>([]); // gets the list of exercises when component is mounted so that the fuzzy search can work on this 
     const API_GET_EXERCISES = (import.meta.env.VITE_APP_API_URL?.concat("/exercises")) as string
     const [exerciseType , setExerciseType] = useState<String>("weight");
+    const [errorMessage, setErrorMessage] = useState<String>();
 
     // today's date
     const date = new Date();
@@ -34,7 +35,6 @@ function Dashboard() {
         const date_worked = payload.date + " 00:00:00"
         const duration_seconds = convertToSeconds(payload.hours as string, payload.minutes as string, payload.seconds as string)
 
-        
         // const foundMuscle = exerciseList.find(item => item.exercise_name.toLowerCase() === searchQuery.toLowerCase())
 
         switch(exerciseType) {
@@ -45,7 +45,8 @@ function Dashboard() {
                     weight: payload.weight,
                     units: payload.units,
                     reps: payload.reps, 
-                    date_worked: date_worked
+                    date_worked: date_worked,
+                    notes: payload.notes
                 }
                 break;
             case "distance":    
@@ -54,7 +55,8 @@ function Dashboard() {
                     exercise_name: payload?.exerciseName,
                     distance: payload.distance,
                     units: payload.units,
-                    date_worked: date_worked
+                    date_worked: date_worked,
+                    notes: payload.notes
                 }
                 break
             case "time":
@@ -62,11 +64,11 @@ function Dashboard() {
                     exercise_type: exerciseType as FormDataEntryValue,
                     exercise_name: payload?.exerciseName,
                     duration_seconds: duration_seconds as FormDataEntryValue,
-                    date_worked: date_worked
+                    date_worked: date_worked,
+                    notes: payload.notes
                 }    
                 break
         }
-        console.log(payload)
 
         axios.post(API_URL_CREATE_SET, 
             {
@@ -76,16 +78,12 @@ function Dashboard() {
             headers: {Authorization: `Bearer ${token}`},
             }
         ).then((response) => {
+            setErrorMessage('')
             setNewSets(prev=>prev+1);      // when an exercise is created successfully wit will then update the count which the useeffect is dependent on
         }).catch(err => {
             if (err.response) {
-                if (err.response.status === 40) {
-                    // setErrorMessage("Email is already taken. Please use a different one or reset password");
-                    console.log("Error couldn't add set");
-                }
-                else {
-                    // setErrorMessage("An error has occured");
-                    console.log(err.response);
+                if (err.response.status === 400) {
+                    setErrorMessage(err.response.data.message);
                 }
             }
         })
@@ -144,6 +142,7 @@ function Dashboard() {
                 <form onSubmit={handleSubmit}>
                     <div className="form-group" style={{ position: 'relative' }}>
                         <h2>Add Set</h2>
+                        {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
                         <label htmlFor="exerciseNameField">Exercise</label>
                         <input type="text" className="form-control" name="exerciseName" id="exerciseNameField" aria-describedby="emailHelp" placeholder="Enter Exercise" value={searchQuery} onChange={handleSearchChange}/>
                         <ul className="list-group" style={{ position: 'absolute', width: '100%'}}>
@@ -204,7 +203,7 @@ function Dashboard() {
                             {(exerciseType == "weight" || exerciseType == "distance") &&
                                 <>
                                 <label htmlFor="repsField">Units</label>
-                                    <select name="unit" className="form-control" id="unitField">
+                                    <select name="units" className="form-control" id="unitsField">
                                         {exerciseType == "weight" &&
                                         <>
                                             <option value="lbs">lbs</option>    
@@ -227,6 +226,8 @@ function Dashboard() {
                                 <input type="number" name="reps" className="form-control" id="repsField" placeholder="Reps"/>
                             </>
                             )}
+                            <label htmlFor="notesField ">Notes</label>  
+                            <textarea style= {{overflowY : 'auto'}} name="notes" className="form-control" id="notesField" placeholder="Enter Notes"/>
                     </div>
                     <div className="d-flex justify-content-center py-3">  
                         <button type="submit" className="btn btn-primary center px-3">Submit</button>
