@@ -14,8 +14,9 @@ function Signup() {
         event.preventDefault();
         const formData = new FormData(event.target as HTMLFormElement);
         const payload = Object.fromEntries(formData);
+        
 
-        axios.post('http://localhost:8080/users/create', payload)
+        axios.post(import.meta.env.VITE_APP_API_URL?.concat("/users/create"), payload)
         .then(response => {
             navigate('/');
         })

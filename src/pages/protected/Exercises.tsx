@@ -62,6 +62,7 @@ function Exercises() {
     const API_GET_EXERCISES = (import.meta.env.VITE_APP_API_URL?.concat("/exercises/")) as string
     
     useEffect(() => {
+        console.log("API TO GET ALL EXERCISES: " + API_GET_EXERCISES)
         axios.get(API_GET_EXERCISES, {
             headers: {Authorization: `Bearer ${token}`}
         }).then((response) => {

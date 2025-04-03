@@ -14,8 +14,9 @@ function Login(){
         event.preventDefault();
         const formData = new FormData(event.target as HTMLFormElement);
         const payload = Object.fromEntries(formData);
+        
 
-        axios.post('http://localhost:8080/users/login', payload)
+        axios.post(import.meta.env.VITE_APP_API_URL?.concat("/users/login"), payload)
         .then(response => {
             const { token, user} = response.data;
             localStorage.setItem("token", token);
