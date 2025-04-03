@@ -16,6 +16,8 @@ function Dashboard() {
     const API_GET_EXERCISES = (import.meta.env.VITE_APP_API_URL?.concat("/exercises")) as string
     const [exerciseType , setExerciseType] = useState<String>("weight");
     const [errorMessage, setErrorMessage] = useState<String>();
+    const [successMessage, setsuccessMessage] = useState<String>();
+
 
     // today's date
     const date = new Date();
@@ -79,6 +81,7 @@ function Dashboard() {
             }
         ).then((response) => {
             setErrorMessage('')
+            setsuccessMessage(response.data.message)
             setNewSets(prev=>prev+1);      // when an exercise is created successfully wit will then update the count which the useeffect is dependent on
         }).catch(err => {
             if (err.response) {
@@ -139,10 +142,11 @@ function Dashboard() {
       <Header showNav={true} textColor={"black"} loggedIn={true}/>
       <div className="container d-flex flex-column justify-content-center align-items-center vh-100">
             <div className="col-md-6 p-4 shadow rounded bg-light">
+                {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
+                {successMessage && <div className="alert alert-success">{successMessage}</div>}
                 <form onSubmit={handleSubmit}>
                     <div className="form-group" style={{ position: 'relative' }}>
                         <h2>Add Set</h2>
-                        {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
                         <label htmlFor="exerciseNameField">Exercise</label>
                         <input type="text" className="form-control" name="exerciseName" id="exerciseNameField" aria-describedby="emailHelp" placeholder="Enter Exercise" value={searchQuery} onChange={handleSearchChange}/>
                         <ul className="list-group" style={{ position: 'absolute', width: '100%'}}>

@@ -17,14 +17,15 @@ export const handleExerciseSubmit = (event: FormEvent,
     searchQuery: string, 
     muscleGroups: Musclegroup[], 
     token: string, 
-    setNewExercises:React.Dispatch<React.SetStateAction<number>>
+    setNewExercises:React.Dispatch<React.SetStateAction<number>>,
+    setErrorMessage: React.Dispatch<React.SetStateAction<String>>,
+    setSuccessMessage: React.Dispatch<React.SetStateAction<String>>
     ) => {
         event.preventDefault();
         const API_URL_CREATE_EXERCISE = (import.meta.env.VITE_APP_API_URL?.concat("/exercises/createExercise")) as string
         const formData = new FormData(event.target as HTMLFormElement);
         const payload = Object.fromEntries(formData);
-
-
+        
         const foundMuscle = muscleGroups.find(item => item.name.toLowerCase() === searchQuery.toLowerCase())
 
         axios.post(API_URL_CREATE_EXERCISE, 
@@ -37,16 +38,12 @@ export const handleExerciseSubmit = (event: FormEvent,
             }
         ).then((response) => {
             setNewExercises(prev=>prev+1);      // when an exercise is created successfully wit will then update the count which the useeffect is dependent on
+            setSuccessMessage(response.data.message);
+            setErrorMessage('')
         }).catch(err => {
             if (err.response) {
-                if (err.response.status === 409) {
-                    // setErrorMessage("Email is already taken. Please use a different one or reset password");
-                    console.log("Error");
-                }
-                else {
-                    // setErrorMessage("An error has occured");
-                    console.log("Error");
-                }
+                setSuccessMessage('');
+                setErrorMessage(err.response.data.message);
             }
         })
 }

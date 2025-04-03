@@ -16,6 +16,8 @@ function Exercises() {
     const [muscleGroups, setMuscleGroups] = useState<Musclegroup[]>([]); // gets the list of muscle groups when component is mounted so that the fuzzy search can work on this 
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredMuscleGroups, setFilteredMuscleGroups] = useState<any[]>([]);
+    const [errorMessage, setErrorMessage] = useState<String>('')
+    const [successMessage, setSuccessMessage] = useState<String>('')
 
     
     let filteredList = useFuzzySearchList({
@@ -64,14 +66,13 @@ function Exercises() {
             headers: {Authorization: `Bearer ${token}`}
         }).then((response) => {
             setExercises(response.data);
+
         }).catch(err => {
             if (err.response) {
                 if (err.response.status === 409) {
-                    // setErrorMessage("Email is already taken. Please use a different one or reset password");
                     console.log("Error");
                 }
                 else {
-                    // setErrorMessage("An error has occured");
                     console.log("Error");
                 }
             }
@@ -85,10 +86,12 @@ function Exercises() {
       <Header showNav={true} textColor={"black"} loggedIn={true}/>
       <div className="container d-flex flex-column flex-md-row justify-content-center align-items-center vh-100">
             <div className="col-md-6 p-4 m-4 shadow rounded bg-light">
-                <form onSubmit={(e) => handleExerciseSubmit(e, searchQuery, muscleGroups, token, setNewExercises)}>
+                <form onSubmit={(e) => handleExerciseSubmit(e, searchQuery, muscleGroups, token, setNewExercises, setErrorMessage, setSuccessMessage)}>
+                    
+                    {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
+                    {successMessage && <div className="alert alert-success">{successMessage}</div>}
                     <div className="form-group">
                         <h2>Add Custom Exercise</h2>
-                        {/* {errorMessage && <div className="alert alert-danger">{errorMessage}</div>} */}
                         <label htmlFor="exerciseNameField">Exercise Name</label>
                         <input type="text" className="form-control" name="exerciseName" id="exerciseNameField"placeholder="Enter Exercise Name"/>
                     </div>
