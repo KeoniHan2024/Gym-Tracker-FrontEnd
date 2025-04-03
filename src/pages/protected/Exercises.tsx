@@ -81,6 +81,16 @@ function Exercises() {
     <>
       <Header showNav={true} textColor={"black"} loggedIn={true}/>
       <div className="container d-flex flex-column flex-md-row justify-content-center align-items-center vh-100">
+            <div className="col-md-5 p-4 m-4 shadow rounded bg-light ">
+                <h3>Exercises</h3>
+                <ul className="listGroup" style={{ maxHeight: '300px', overflowY: 'auto'}}>
+                    {exercises.map((exercise) => (
+                        <li key = {exercise.id} className="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        {exercise.exercise_name}
+                        </li>
+                    ))}
+                </ul>
+            </div>
             <div className="col-md-6 p-4 m-4 shadow rounded bg-light">
                 <form onSubmit={(e) => handleExerciseSubmit(e, searchQuery, muscleGroups, token, setNewExercises, setErrorMessage, setSuccessMessage)}>
                     
@@ -105,16 +115,6 @@ function Exercises() {
                         <button type="submit" className="btn btn-primary center px-3">Create</button>
                     </div>
                 </form>
-            </div>
-            <div className="col-md-5 p-4 m-4 shadow rounded bg-light ">
-                <h3>Exercises</h3>
-                <ul className="listGroup" style={{ maxHeight: '300px', overflowY: 'auto'}}>
-                    {exercises.map((exercise) => (
-                        <li key = {exercise.id} className="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                        {exercise.exercise_name}
-                        </li>
-                    ))}
-                </ul>
             </div>
         </div>
     </>

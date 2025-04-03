@@ -30,6 +30,9 @@ function Header( {showNav, textColor, loggedIn }: {showNav:boolean, textColor:st
                 <li className="nav-item">
                   <a className="nav-link  text-reset" href="/Exercises">Exercises</a>
                 </li>
+                <li className="nav-item">
+                  <a className="nav-link  text-reset" href="/Bodyweight">Bodyweight</a>
+                </li>
                   {loggedIn && <li className="nav-item">
                   <a className="nav-link text-reset" href="/logout">Logout</a>
                 </li>}

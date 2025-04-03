@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/protected/Dashboard";
 import AddSet from "./pages/protected/Sets"
 import Exercises from "./pages/protected/Exercises"
+import Bodyweight from "./pages/protected/BodyWeight";
 import Logout from "./pages/protected/Logout" 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../scss/colors.css';
@@ -29,6 +30,7 @@ function App() {
             <Route path="/Dashboard" element={<Dashboard />} />
             <Route path="/Sets" element={<AddSet />} />
             <Route path="/Exercises" element={<Exercises />} />
+            <Route path="/Bodyweight" element={<Bodyweight />} />
             <Route path="/Logout" element={<Logout />} />
           </Route>
         </Routes>
