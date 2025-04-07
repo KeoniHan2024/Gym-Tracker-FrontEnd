@@ -5,6 +5,7 @@ import { buttonEvent, FormEvent, InputChangeEvent } from "../../types";
 import { fetchMuscleGroups, handleExerciseSubmit } from "../../services/ExercisesServices";
 import { useFuzzySearchList, Highlight } from '@nozbe/microfuzz/react';
 import { useNavigate } from 'react-router-dom';
+import { useFetchExercises } from "../../hooks/useFetchExercises";
 
 
 
@@ -12,13 +13,15 @@ function Exercises() {
     // user's logged in token
     const token = localStorage.getItem("token") as string;
     const navigate = useNavigate();
-    const [exercises, setExercises] = useState<Exercise[]>([]); // keeps track of exercises from the user and the default one
+    // const [exercises, setExercises] = useState<Exercise[]>([]); // keeps track of exercises from the user and the default one
     const [newExercises, setNewExercises] = useState(0); // keeps track of newexercises added. if new one is added it will re render the list
     const [muscleGroups, setMuscleGroups] = useState<Musclegroup[]>([]); // gets the list of muscle groups when component is mounted so that the fuzzy search can work on this 
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredMuscleGroups, setFilteredMuscleGroups] = useState<any[]>([]);
     const [errorMessage, setErrorMessage] = useState<String>('')
     const [successMessage, setSuccessMessage] = useState<String>('')
+    
+    const exercises= useFetchExercises(token, newExercises)
 
     
     let filteredList = useFuzzySearchList({
@@ -59,23 +62,23 @@ function Exercises() {
         setFilteredMuscleGroups([])
     }
 
-    // update exercise list everytime a new exercise is added 
-    const API_GET_EXERCISES = (import.meta.env.VITE_APP_API_URL?.concat("/exercises/")) as string
+    // // update exercise list everytime a new exercise is added 
+    // const API_GET_EXERCISES = (import.meta.env.VITE_APP_API_URL?.concat("/exercises/")) as string
     
-    useEffect(() => {
+    // useEffect(() => {
 
-        axios.get(API_GET_EXERCISES, {
-            headers: {Authorization: `Bearer ${token}`}
-        }).then((response) => {
-            setExercises(response.data);
+    //     axios.get(API_GET_EXERCISES, {
+    //         headers: {Authorization: `Bearer ${token}`}
+    //     }).then((response) => {
+    //         setExercises(response.data);
 
-        }).catch(err => {  
-            localStorage.removeItem("token")
-            navigate("/login", { state: "Login Session has expired" })
-        })
-    }, [newExercises])
+    //     }).catch(err => {  
+    //         localStorage.removeItem("token")
+    //         navigate("/login", { state: "Login Session has expired" })
+    //     })
+    // }, [newExercises])
 
-    
+
 
   return (
     <>
