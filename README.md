@@ -1,6 +1,6 @@
 # Gym Tracker Frontend
 
-The Gym Tracker Frontend is a user-friendly web application built with React, TypeScript, and Bootstrap, designed to help users log their gym workouts and track their progress. This app allows users to add custom exercises, view their exercise history, and track progress in terms of sets and weights lifted.
+The Gym Tracker Frontend is a built with React and TypeScript, designed to help users log their gym workouts and track their progress. This app allows users to add custom exercises, view their exercise history, and track progress in terms of sets and weights lifted.
 
 ## Features
 - **Add Custom Exercises**: Users can create new exercises and track them.
@@ -8,12 +8,11 @@ The Gym Tracker Frontend is a user-friendly web application built with React, Ty
 - **Authentication**: Secure authentication to ensure only authorized users can add or view exercises.
 
 # Coming Soon
-I am currently working on these feature and it will be available shortly. Stay tuned for updates!
+I am currently working on these features. Stay tuned for updates!
 
 ## Upcoming Features
 - **User Progress Tracker:** A detailed dashboard to track your gym progress over time.
 - **Exercise Library:** A growing library of exercises with instructional videos and tips.
-- **Workout Plans:** Pre-made workout plans tailored to your goals (strength, weight loss, etc.).
 - **Social Sharing:** Share your achievements with friends and the community.
 - **Exercise History:** View your workout history with detailed stats on sets, reps, and weights.
 - **Custom Exercises:** Add and track your own custom exercises to your workout routine.
