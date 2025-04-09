@@ -86,6 +86,7 @@ function Dashboard() {
         }).catch(err => {
             if (err.response) {
                 if (err.response.status === 400) {
+                    setsuccessMessage('')
                     setErrorMessage(err.response.data.message);
                 }
             }

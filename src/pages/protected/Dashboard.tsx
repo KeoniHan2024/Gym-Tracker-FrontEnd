@@ -1,10 +1,12 @@
 import Header from "../../components/ui/header";
 import { useFetchExercises, useFetchNonEmptyExercises } from "../../hooks/useFetchExercises";
 import { useState } from "react";
-import { scaleLinear } from "@visx/scale";
+import { scaleLinear, scaleUtc } from "@visx/scale";
 import { curveBasis, curveLinear } from "@visx/curve";
 import { LinePath } from "@visx/shape";
 import { AxisBottom, AxisLeft } from "@visx/axis";
+import Graph from "../../components/ui/graph";
+
 
 function Dashboard() {
 
@@ -15,49 +17,39 @@ function Dashboard() {
   const width = 300;
   const height = 200;
   const margin = { top: 20, right: 20, bottom: 20, left: 20 };
-  const data = [
-    { x: 0, y: 10 },
-    { x: 2, y: 30 },
-    { x: 4, y: 20 },
-    { x: 6, y: 40 },
-    { x: 8, y: 25 },
-  ];
 
-  const xScale = scaleLinear({
-    domain: [0, Math.max(...data.map(d => d.x))],
-    range: [margin.left, width - margin.right],
-  });
+  const rawData = [
+    {date: "01-02-25 00:00:00", reps: 4, weight: 5},
+    {date: "01-04-25 00:00:00", reps: 4, weight: 5},
+    {date: "01-08-25 00:00:00", reps: 4, weight: 5},
+    {date: "01-10-25 00:00:00", reps: 4, weight: 5},
+    {date: "02-02-25 00:00:00", reps: 4, weight: 5},
+  ]
 
-  const yScale = scaleLinear({
-    domain: [0, Math.max(...data.map(d => d.y))],
-    range: [height - margin.bottom, margin.top], // Invert for SVG coordinates
-  });
+  const getPounds = (pounds:number) => pounds * 2.20462
+  const getDate = (date:string) => new Date(date)
 
+  // convert all weight to pounds 
+  // only graph each exercise type at a time. i.e. if distance and time exercises are recorder only do one
+
+  const data = rawData.map((d) => (
+    {
+      weight: getPounds(d.weight),
+      date: getDate(d.date)
+    }
+  ))
 
   return (
     <>
       <Header showNav={true} textColor={"black"} loggedIn={true}/>
       <div className="container d-flex flex-column flex-md-row justify-content-center align-items-center vh-100">
-        <div className="col-md-5 p-4 m-4 shadow rounded bg-light ">
+        <div className="col-md-5 p-4 m-4 shadow rounded bg-dark" style={{ position: 'relative' }}>
           <select>
             {exercises.map((exercise) => (
               <option value= {exercise.exercise_name} key={exercise.id}>{exercise.exercise_name}</option>
             ))}
           </select>
-          <svg width="500" height="500">
-            <AxisLeft scale={yScale} left={margin.left}></AxisLeft>
-            <AxisBottom scale={xScale} top={height - margin.bottom} ></AxisBottom>
-          <LinePath
-            data={data}
-            x={d => xScale(d.x)}
-            y={d => yScale(d.y)}
-            stroke="steelblue"
-            strokeWidth={2}
-            fill="none"
-            curve={curveLinear} // Apply the curve interpolator here
-          />
-          </svg>
-
+          <Graph></Graph>
         </div>
       </div>
     </>
