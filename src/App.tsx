@@ -6,7 +6,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/protected/Dashboard";
 import AddSet from "./pages/protected/Sets"
 import Exercises from "./pages/protected/Exercises"
-import Bodyweight from "./pages/protected/BodyWeight";
+import Bodyweight from "./pages/protected/Bodyweight";
 import Logout from "./pages/protected/Logout" 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../scss/colors.css';
