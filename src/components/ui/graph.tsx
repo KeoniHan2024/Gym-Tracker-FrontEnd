@@ -1,7 +1,7 @@
 import useMeasure from "react-use-measure";
 import { scaleLinear, scaleTime, TimeScaleConfig } from "@visx/scale";
 import { Group } from "@visx/group";
-import { AxisBottom, AxisLeft } from "@visx/axis";
+import { AxisBottom, AxisLeft, AxisTop } from "@visx/axis";
 import { Bar, Circle, Line, LinePath } from "@visx/shape";
 import { curveBasis, curveMonotoneX } from "@visx/curve";
 import {
@@ -35,7 +35,7 @@ function Graph() {
     { date: "2025-04-15 00:00:00", reps: 13 },
   ];
 
-  const margin = 32;
+  const margin = 48;
   const defaultWidth = 100;
   const defaultHeight = 100;
 
@@ -68,7 +68,8 @@ function Graph() {
   //   ];
 
   const yExtent = [
-    Math.min(...data.map((d) => getYValue(d))),
+    // Math.min(...data.map((d) => getYValue(d))),
+    0,
     Math.max(...data.map((d) => getYValue(d))),
   ];
 
@@ -121,10 +122,13 @@ function Graph() {
           
         </Group>
         <Group>
-          <AxisLeft left={margin} scale={yScale} stroke={axisColor} tickStroke={axisColor} tickLabelProps={{fill: 'white',fontSize: 15}}/>
+          <AxisLeft label={"Reps"} labelOffset={25} labelProps={{fill: "white", fontSize: 15}} left={margin} scale={yScale} stroke={axisColor} tickStroke={axisColor} tickLabelProps={{fill: 'white',fontSize: 15}}/>
         </Group>
         <Group>
-          <AxisBottom top={innerHeight} scale={xScale} stroke={axisColor} tickStroke={axisColor} tickLabelProps={{fill: 'white',fontSize: 10}}  numTicks={5}/>
+          <AxisBottom top={innerHeight} label={"Reps"} labelProps={{fill: "white", fontSize: 10}} scale={xScale} stroke={axisColor} tickStroke={axisColor} tickLabelProps={{fill: 'white',fontSize: "0.75vw"}}  numTicks={5}/>
+        </Group>
+        <Group>
+          <AxisTop top={margin} scale={xScale} labelOffset={1} label={"Progression"} hideAxisLine={true} hideTicks={true} labelProps={{fill: "white", fontSize: "2.2vw"}} tickLabelProps={{display: 'none'}}></AxisTop>
         </Group>
         <Group>
           <Bar

@@ -43,12 +43,15 @@ function Dashboard() {
     <>
       <Header showNav={true} textColor={"black"} loggedIn={true}/>
       <div className="container d-flex flex-column flex-md-row justify-content-center align-items-center vh-100">
+        <div className="col-3-md p-4 m-4 shadow rounded bg-dark" style={{ position: 'relative' }}>
+            <select>
+              {exercises.map((exercise) => (
+                <option value= {exercise.exercise_name} key={exercise.id}>{exercise.exercise_name}</option>
+              ))}
+            </select>
+          </div>
+
         <div className="col-md-5 p-4 m-4 shadow rounded bg-dark" style={{ position: 'relative' }}>
-          <select>
-            {exercises.map((exercise) => (
-              <option value= {exercise.exercise_name} key={exercise.id}>{exercise.exercise_name}</option>
-            ))}
-          </select>
           <Graph></Graph>
         </div>
       </div>
