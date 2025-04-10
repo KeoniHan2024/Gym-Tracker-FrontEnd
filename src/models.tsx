@@ -5,6 +5,6 @@ interface Musclegroup {
 
 // Define the Exercise interface
 interface Exercise {
-    id: number;
+    exercise_id: number;
     exercise_name: string;
 }

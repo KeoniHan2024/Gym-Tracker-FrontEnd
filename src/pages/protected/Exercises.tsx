@@ -88,7 +88,7 @@ function Exercises() {
                 <h3>Exercises</h3>
                 <ul className="listGroup" style={{ maxHeight: '300px', overflowY: 'auto'}}>
                     {exercises.map((exercise) => (
-                        <li key = {exercise.id} className="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <li key = {exercise.exercise_id} className="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                         {exercise.exercise_name}
                         </li>
                     ))}
@@ -110,7 +110,7 @@ function Exercises() {
                         <ul className="list-group" style={{ position: 'absolute', width: '100%'}}>
                             {
                             filteredMuscleGroups.map((muscleGroup) => (
-                                <button type="button" className="list-group-item list-group-item-action" onClick={() => handleMuscleSelection({id: muscleGroup.item.id, exercise_name: muscleGroup.item.name})} key={muscleGroup.item.id}>{muscleGroup.item.name}</button>
+                                <button type="button" className="list-group-item list-group-item-action" onClick={() => handleMuscleSelection({exercise_id: muscleGroup.item.id, exercise_name: muscleGroup.item.name})} key={muscleGroup.item.id}>{muscleGroup.item.name}</button>
                             ))}
                         </ul>
                     </div>

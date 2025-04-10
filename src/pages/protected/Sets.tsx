@@ -153,7 +153,7 @@ function Dashboard() {
                         <ul className="list-group" style={{ position: 'absolute', width: '100%'}}>
                             {
                             filteredExercises.map((exercise) => (
-                                <button type="button" className="list-group-item list-group-item-action" onClick={() => handleExerciseSelection({id: exercise.item.id, exercise_name: exercise.item.exercise_name})} key={exercise.item.id}>{exercise.item.exercise_name}</button>
+                                <button type="button" className="list-group-item list-group-item-action" onClick={() => handleExerciseSelection({exercise_id: exercise.item.id, exercise_name: exercise.item.exercise_name})} key={exercise.item.id}>{exercise.item.exercise_name}</button>
                             ))}
                         </ul>
                     </div>
