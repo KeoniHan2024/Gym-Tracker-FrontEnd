@@ -25,9 +25,9 @@ function Dashboard() {
 
   return (
     <>
-      <Header showNav={true} textColor={"black"} loggedIn={true}/>
+      <Header showNav={true} textColor={"white"} loggedIn={true}/>
       <div className="container d-flex flex-column flex-md-row justify-content-center align-items-center vh-100">
-        <div className="col-3-md p-4 m-4 shadow rounded bg-dark" style={{ position: 'relative' }}>
+        <div className="col-3-md p-4 m-4 shadow rounded bg-light" style={{ position: 'relative' }}>
             <select onChange={(e) => {setSelectedExercise(parseInt(e.target.value))}}>
               {exercises.map((exercise) => (
                 <option value= {exercise.exercise_id} key={exercise.exercise_id}>{exercise.exercise_name}</option>

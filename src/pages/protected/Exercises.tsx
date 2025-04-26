@@ -82,7 +82,7 @@ function Exercises() {
 
   return (
     <>
-      <Header showNav={true} textColor={"black"} loggedIn={true}/>
+      <Header showNav={true} textColor={"white"} loggedIn={true}/>
       <div className="container d-flex flex-column flex-md-row justify-content-center align-items-center vh-100">
             <div className="col-md-5 p-4 m-4 shadow rounded bg-light ">
                 <h3>Exercises</h3>

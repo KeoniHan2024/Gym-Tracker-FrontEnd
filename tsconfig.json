@@ -16,6 +16,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"],
+  "include": ["src", "oldPages/Login_old.tsx", "oldPages/Signup_old.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

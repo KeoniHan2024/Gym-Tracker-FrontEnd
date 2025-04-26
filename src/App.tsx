@@ -9,9 +9,8 @@ import Exercises from "./pages/protected/Exercises"
 import Bodyweight from "./pages/protected/Bodyweight";
 import Logout from "./pages/protected/Logout" 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../scss/colors.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';  // This includes Popper.js
-import '../scss/components.css';
+import '../scss/custom.css';
 import '../scss/main.css';
 
 

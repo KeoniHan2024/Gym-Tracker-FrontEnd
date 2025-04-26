@@ -9,7 +9,7 @@ function Bodyweight() {
     const todayDate = yyyy + "-" + mm + "-" + dd
 
     return(<>
-        <Header showNav={true} textColor="black" loggedIn={true}></Header>
+        <Header showNav={true} textColor="white" loggedIn={true}></Header>
         <div className="container d-flex flex-column flex-md-row justify-content-center align-items-center vh-100">
             <div className="col-md-5 p-4 m-4 shadow rounded bg-light ">
                 <h3>INSERT WEIGHT GRAPH HERE</h3>

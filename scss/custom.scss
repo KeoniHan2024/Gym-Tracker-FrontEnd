@@ -1,4 +1,33 @@
-@import 'colors.scss';  // Importing the colors.scss file
+$primary: #061F2D;
+$secondary: #51A0B5;
+$tertiary: #4A7889;
+$colorfour: #131315;
+$success: #32cd32;  // Lime green
+$danger: #dc143c;  // Crimson red
+
+
+// Import Bootstrap’s SCSS files after the variable overrides
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+
+:root {
+    --bs-body-font-family: 'Roboto Mono', sans-serif;
+}
+
+body {
+  background-color: #131414;
+
+}
+
+.fs-7 {
+    font-size: 0.9rem; /* Adjust the value as needed */
+  }
+
+$theme-colors: (
+  "colorfour": $colorfour
+);
 
 .container-custom {
     width: 100%;
