@@ -50,7 +50,7 @@
     "aws-cdk-lib": "^2.180.0",
     "constructs": "^10.4.2",
     "esbuild": "^0.25.0",
-    "postcss": "^7.0.39",
+    "postcss": "^8.5.3",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
     "tsx": "^4.19.3",
     "typescript": "^5.8.2",

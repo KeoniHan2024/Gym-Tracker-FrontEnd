@@ -98,7 +98,7 @@ function LineGraph({selectedExercise}: {selectedExercise: number}) {
 
   return (
      <>
-      <Line options = {options} data={lineChartData}></Line>
+      {/* <Line options = {options} data={lineChartData}></Line> */}
      </>
   );
 }
