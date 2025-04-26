@@ -26,7 +26,7 @@ const BodyWeightForm = () => {
         <div className="input-group">
           <div className="form-column">
             <label htmlFor="bodyWeightField">Units</label>
-            <select name="type" className="form-control" id="unitsField">
+            <select name="type" id="unitsField">
               <option value="lb">lbs</option>
               <option value="kg">kgs</option>
             </select>
@@ -36,7 +36,6 @@ const BodyWeightForm = () => {
             <input
               type="date"
               name="date"
-              className="form-control"
               id="dateField"
               defaultValue={todayDate}
             />

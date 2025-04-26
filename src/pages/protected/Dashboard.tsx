@@ -35,7 +35,7 @@ function Dashboard() {
             </select>
           </div>
 
-        <div className="col-md-10 p-4 m-4 shadow rounded bg-dark" style={{ position: 'relative' }}>
+        <div className="col-md-10 p-4 m-4 shadow rounded " style={{ position: 'relative', backgroundColor:"#111827"}}>
           <LineGraph selectedExercise={selectedExercise}></LineGraph>
         </div>
       </div>
