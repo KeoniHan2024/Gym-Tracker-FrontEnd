@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-
+import "../../css/header.css"
 
 
 function Header( {showNav, textColor, loggedIn }: {showNav:boolean, textColor:string, loggedIn: boolean} ) {
@@ -36,17 +36,6 @@ function Header( {showNav, textColor, loggedIn }: {showNav:boolean, textColor:st
                   {loggedIn && <li className="nav-item">
                   <a className="nav-link text-reset" href="/logout">Logout</a>
                 </li>}
-                {/* <li className="nav-item dropdown">
-                  <a className="nav-link dropdown-toggle text-reset" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Dropdown
-                  </a>
-                  <ul className="dropdown-menu bg-primary text-reset">
-                    <li><a className="dropdown-item text-reset" href="#">Action</a></li>
-                    <li><a className="dropdown-item text-reset" href="#">Another action</a></li>
-                    <li><hr className="dropdown-divider"/></li>
-                    <li><a className="dropdown-item text-reset" href="#">Something else here</a></li>
-                  </ul>
-                </li> */}
               </ul>
             </div>}
             
