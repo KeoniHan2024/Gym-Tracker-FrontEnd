@@ -25,11 +25,11 @@ function Hero() {
                     </div>
                 </div>
             </div>
-            <a href="#scroll-down" className="hero-container__scroll-btn">
+            {/* <a href="#scroll-down" className="hero-container__scroll-btn">
                 Explore <FontAwesomeIcon className="downArrow" icon={faArrowDown} style={{color: "#ffffff",}} />
-            </a>
+            </a> */}
         </section>
-            <a id="scroll-down"></a>
+            {/* <a id="scroll-down"></a>
 
         <section className="steps container-custom">
             <div className="row">
@@ -38,7 +38,7 @@ function Hero() {
                 </div>
             </div>
 
-        </section>
+        </section> */}
       
         </>
     );

@@ -37,7 +37,8 @@ export const handleExerciseSubmit = (event: FormEvent,
             headers: {Authorization: `Bearer ${token}`}
             }
         ).then((response) => {
-            setNewExercises(prev=>prev+1);      // when an exercise is created successfully wit will then update the count which the useeffect is dependent on
+            console.log(response.data)
+            setNewExercises((prevCount) => prevCount + 1);      // when an exercise is created successfully wit will then update the count which the useeffect is dependent on
             setSuccessMessage(response.data.message);
             setErrorMessage('')
         }).catch(err => {

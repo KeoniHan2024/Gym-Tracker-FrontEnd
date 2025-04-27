@@ -23,7 +23,6 @@ const LoginForm = () => {
           navigate("/Dashboard"); //TODO - CHANGE TO DASHBOARD WITH USER STATS (Protected Route)
         })
         .catch((err) => {
-          console.log("error");
           setErrorMessage("Login Failed");
         });
     };

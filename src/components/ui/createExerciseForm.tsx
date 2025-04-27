@@ -4,6 +4,7 @@ import { InputChangeEvent } from "../../types";
 import { useFuzzySearchList } from "@nozbe/microfuzz/react";
 import { useNavigate } from "react-router-dom";
 import { useFetchExercises } from "../../hooks/useFetchExercises";
+import "../../css/exercises.css";
 
 const CreateExerciseForm = () => {
   // user's logged in token
@@ -103,17 +104,18 @@ const CreateExerciseForm = () => {
                   onChange={handleSearchChange}
                 />
                 <ul
-                  className="list-group-item"
+                  className="muscle-group-search"
                   style={{ position: "absolute", width: "100%" }}
                 >
                   {filteredMuscleGroups.map((muscleGroup) => (
                     <button
                       type="button"
-                      className="input-group-item"
+                      className="list-group-item"
                       onClick={() =>
                         handleMuscleSelection({
                           exercise_id: muscleGroup.item.id,
                           exercise_name: muscleGroup.item.name,
+                          is_default: 1
                         })
                       }
                       key={muscleGroup.item.id}

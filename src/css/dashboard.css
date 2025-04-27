@@ -1,0 +1,47 @@
+
+.dashboard-grid {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 250px;
+}
+
+
+.dashboard-row {
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+.graph-container {
+    display: flex;
+    flex-direction: column;
+    width: 1200px;
+    margin: auto;
+    padding: 30px 45px;
+    background-color: #151e31;
+    border-radius: 16px;
+}
+
+.graph-container select {
+    width: fit-content;
+    border-radius: 0.375rem;
+    border: 1px solid rgba(55, 65, 81, 1);
+    outline: 0;
+    background-color: rgba(17, 24, 39, 1);
+    padding: 0.75rem 1rem;
+    color: rgba(243, 244, 246, 1);
+}
+
+.graph-row {
+    height: 450px;
+}
+
+
+@media(max-width: 800px) {
+    .graph-container {
+        width: 95%;
+        overflow-x: auto;
+    }
+}

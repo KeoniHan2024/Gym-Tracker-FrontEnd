@@ -20,7 +20,7 @@ export function useFetchExercises(token: string, newExercises:number): Exercise[
             localStorage.removeItem("token")
             navigate("/login", { state: "Login Session has expired" })
         })
-    }, [token, newExercises, navigate])
+    }, [token, newExercises, navigate, exercises])
 
     return exercises;
 }

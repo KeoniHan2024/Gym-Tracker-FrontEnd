@@ -38,7 +38,10 @@ function LineGraph({ selectedExercise }: { selectedExercise: number }) {
   const [labels, setLabels] = useState<String[]>([]);
   const [data, setData] = useState<number[]>([]);
   const [groupedSets, setGroupedSets] = useState();
-  const [weightListPerDay, setWeightListPerDay] = useState<{
+  const [setWeights, setSetWeights] = useState<{
+    [date: string]: number[];
+  }>({});
+  const [setReps, setSetReps] = useState<{
     [date: string]: number[];
   }>({});
   const token = localStorage.getItem("token");
@@ -54,7 +57,8 @@ function LineGraph({ selectedExercise }: { selectedExercise: number }) {
           params: queryParams,
         })
         .then((response) => {
-          setWeightListPerDay(response.data.setsPerDay);
+          setSetWeights(response.data.setWeights);
+          setSetReps(response.data.setReps);
           setData(response.data.averages);
           setLabels(response.data.labels);
           setGroupedSets(response.data.groupedSets);
@@ -66,12 +70,29 @@ function LineGraph({ selectedExercise }: { selectedExercise: number }) {
   }, [selectedExercise]);
 
   const options = {
+    maintainAspectRatio: false,
     plugins: {
+      zoom: {
+        pan: {
+            enabled: true,
+            mode: 'x'
+        },
+        zoom: {
+            wheel: {
+                enabled: true,
+            },
+            pinch: {
+                enabled: true
+            },
+            mode: 'x',
+        }
+      },
       title: {
         display: true,
         text: "Average Weight Over Time",
         color: "white",
         font: {
+          family: "Roboto Mono",
           size: 20,
           weight: "bold" as const,
         },
@@ -84,59 +105,102 @@ function LineGraph({ selectedExercise }: { selectedExercise: number }) {
         callbacks: {
           label: function (context: import("chart.js").TooltipItem<"line">) {
             const datasetLabel = context.dataset.label || "";
-            const value = context.raw;
-            let weightList = "";
-            for (let i =0; i < weightListPerDay[context.label].length; i++) {
-              weightList += weightListPerDay[context.label][i] + "lb, ";
+            const value = context.raw as number;
+            let weightList = [];
+            let repsList = [];
+            
+            // Check if weightListPerDay exists
+            if (setWeights && setWeights[context.label]) {
+              for (let i = 0; i < setWeights[context.label].length; i++) {
+                weightList.push(`${setWeights[context.label][i]}lb`); // Push each weight as a separate string
+              }
+            } else {
+              weightList.push("No weights recorded"); //handle the edge case
+            }
+            if (setReps && setReps[context.label]) {
+              for (let i = 0; i < setReps[context.label].length; i++) {
+                repsList.push(`${setReps[context.label][i]}`); // Push each weight as a separate string
+              }
+            } else {
+              repsList.push("No weights recorded"); //handle the edge case
             }
 
-            weightList = weightList.slice(0, -2);
-
-            return [
-              `${datasetLabel}`,
-              `Average Weight Per Rep: ${value}`,
-              `Weight: ${weightList}`
+            // Construct the return array
+            const returnArray = [
+              `${datasetLabel} ${value.toFixed(2)} lbs`,
+              "------Sets------",
             ];
+
+            // Add each weight to the return array
+            weightList.forEach((weight, index) => {
+              returnArray.push("• " + repsList[index] + " reps of " + weight);
+            });
+            return returnArray;
           },
+        },
+        font: {
+          family: "Roboto Mono",
+          size: 20,
+          weight: "bold" as const,
         },
       },
     },
     scales: {
+      
       x: {
         ticks: {
           color: "white",
+          autoSkip: true,
+          maxTicksLimit: 10,
+          font: {
+            family: "Roboto Mono",
+            size: 12
+          },
         },
         title: {
           display: true,
           text: "Date",
           color: "white",
+          font: {
+            family: "Roboto Mono",
+            size: 14,
+            weight: "bold" as const,
+          },
         },
       },
       y: {
         ticks: {
           color: "white",
+          font: {
+            family: "Roboto Mono",
+            size: 12
+          },
         },
         title: {
           display: true,
           text: "Avg Weight Per Rep",
           color: "white",
+          font: {
+            family: "Roboto Mono",
+            size: 14,
+            weight: "bold" as const,
+          },
         },
         beginAtZero: true,
       },
     },
   };
-  
 
   const lineChartData = {
     // create label for every dat
     labels: labels,
     datasets: [
       {
-        label: "Avg Weight per Rep",
+        label: "Avg weight per rep",
         data: data,
         borderColor: "white",
-        pointRadius: 3,        
-      pointHoverRadius: 8    
+        pointRadius: 3,
+        pointHoverRadius: 8,
       },
     ],
   };

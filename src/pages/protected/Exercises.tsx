@@ -2,89 +2,220 @@ import { useEffect, useState } from "react";
 import Header from "../../components/ui/header";
 import axios from "axios";
 import { buttonEvent, FormEvent, InputChangeEvent } from "../../types";
-import {
-  fetchMuscleGroups,
-  handleExerciseSubmit,
-} from "../../services/ExercisesServices";
-import { useFuzzySearchList, Highlight } from "@nozbe/microfuzz/react";
-import { useNavigate } from "react-router-dom";
 import { useFetchExercises } from "../../hooks/useFetchExercises";
 import CreateExerciseForm from "../../components/ui/createExerciseForm";
+import "../../css/exercises.css";
+import { useNavigate } from "react-router-dom";
 
 function Exercises() {
-  // user's logged in token
-  const token = localStorage.getItem("token") as string;
-  const navigate = useNavigate();
-  // const [exercises, setExercises] = useState<Exercise[]>([]); // keeps track of exercises from the user and the default one
-  const [newExercises, setNewExercises] = useState(0); // keeps track of newexercises added. if new one is added it will re render the list
-  const [muscleGroups, setMuscleGroups] = useState<Musclegroup[]>([]); // gets the list of muscle groups when component is mounted so that the fuzzy search can work on this
-  const [searchQuery, setSearchQuery] = useState("");
-  const [filteredMuscleGroups, setFilteredMuscleGroups] = useState<any[]>([]);
   const [errorMessage, setErrorMessage] = useState<String>("");
   const [successMessage, setSuccessMessage] = useState<String>("");
 
+  // user's logged in token
+  const token = localStorage.getItem("token") as string;
+  const [newExercises, setNewExercises] = useState(0); // keeps track of newexercises added. if new one is added it will re render the list
   const exercises = useFetchExercises(token, newExercises);
-
-  let filteredList = useFuzzySearchList({
-    list: muscleGroups,
-    queryText: searchQuery,
-    getText: (item) => [item.name],
-    mapResultItem: ({ item, score, matches: [highlightRanges] }) => ({
-      item,
-      highlightRanges,
-    }),
+  const [editForm, setEditForm] = useState<Exercise>({
+    exercise_id: -1,
+    exercise_name: "",
+    is_default: -1,
   });
+  const [showEditForm, setShowEditForm] = useState<Boolean>(false);
+  const [showDeleteModal, setShowDeleteModal] = useState<Boolean>(false);
+  const [deleteForm, setDeleteForm] = useState<Exercise>({
+    exercise_id: -1,
+    exercise_name: "",
+    is_default: -1,
+  });
+  const API_EDIT_EXERCISE = import.meta.env.VITE_APP_API_URL?.concat(
+    "/exercises/edit/"
+  ) as string;
+  const API_DELETE_EXERCISE = import.meta.env.VITE_APP_API_URL?.concat(
+    "/exercises/delete/"
+  ) as string;
+  const navigate = useNavigate();
 
-  // get all muscle groups when its loaded
-  useEffect(() => {
-    const getMuscleGroups = async () => {
-      const data: Musclegroup[] = await fetchMuscleGroups();
-      // const muscleGroupsList: any[] = JSON.parse(data);
-      setMuscleGroups(data);
-    };
-    getMuscleGroups();
-  }, []);
-
-  // whenever the muscle group field is changed it will do a fuzzy search. and if 0 then reset the list to empty
-  const handleSearchChange = (event: InputChangeEvent) => {
-    const query = event.target.value;
-    setSearchQuery(query);
-    if (query.length == 0) {
-      filteredList = [];
-    }
-    setFilteredMuscleGroups(filteredList.splice(0, 4));
-
-    //if query is in the musclegroup list then set selected muscle to that
-
-    // if not then leave selected muscle as blank
+  const handleEditClick = (exercise: Exercise) => {
+    setEditForm({
+      exercise_id: exercise.exercise_id,
+      exercise_name: exercise.exercise_name,
+      is_default: 1,
+    });
+    setShowEditForm(true);
   };
 
-  function handleMuscleSelection(selectedMuscleGroup: Exercise) {
-    setSearchQuery(selectedMuscleGroup.exercise_name);
-    setFilteredMuscleGroups([]);
-  }
+  const handleModalClose = () => {
+    setShowEditForm(false);
+    setShowDeleteModal(false);
+    setSuccessMessage("");
+    setErrorMessage("");
+  };
 
-  // // update exercise list everytime a new exercise is added
-  // const API_GET_EXERCISES = (import.meta.env.VITE_APP_API_URL?.concat("/exercises/")) as string
+  const handleSaveClick = (event: FormEvent) => {
+    event.preventDefault();
+    const formData = new FormData(event.target as HTMLFormElement);
+    const payload = Object.fromEntries(formData);
+    axios
+      .patch(
+        API_EDIT_EXERCISE + payload.exercise_id,
+        {
+          exercise_name: payload?.exercise_name,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((response) => {
+        setNewExercises((prevCount) => prevCount + 1);
+        setSuccessMessage(response.data.message);
+        setErrorMessage("");
+      })
+      .catch((err) => {
+        if (err.response.data.message == "Token Expired") {
+          localStorage.removeItem("token");
+          navigate("/login", { state: "Login Session has expired" });
+        }
+        setErrorMessage(err.response.data.message);
+        setSuccessMessage("");
+        // localStorage.removeItem("token");
+        // navigate("/login", { state: "Login Session has expired" });
+      });
+  };
 
-  // useEffect(() => {
+  const handleDeleteClick = (exercise: Exercise) => {
+    setDeleteForm({
+      exercise_id: exercise.exercise_id,
+      exercise_name: exercise.exercise_name,
+      is_default: 1,
+    });
+    setShowDeleteModal(true);
+  };
 
-  //     axios.get(API_GET_EXERCISES, {
-  //         headers: {Authorization: `Bearer ${token}`}
-  //     }).then((response) => {
-  //         setExercises(response.data);
-
-  //     }).catch(err => {
-  //         localStorage.removeItem("token")
-  //         navigate("/login", { state: "Login Session has expired" })
-  //     })
-  // }, [newExercises])
+  const handleConfirmDelete = () => {
+    axios
+      .delete(API_DELETE_EXERCISE + deleteForm.exercise_id, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        setShowDeleteModal(false);
+        setNewExercises((prevCount) => prevCount - 1);
+        setSuccessMessage(response.data.message);
+        setErrorMessage("");
+      })
+      .catch((err) => {
+        if (err.response.data.message == "Token Expired") {
+          localStorage.removeItem("token");
+          navigate("/login", { state: "Login Session has expired" });
+        }
+        setErrorMessage(err.response.data.message);
+        setSuccessMessage("");
+      });
+  };
 
   return (
     <>
       <Header showNav={true} textColor={"white"} loggedIn={true} />
-      <div className="sets-grid">
-        <CreateExerciseForm />
+      {showDeleteModal && (
+        <div className="modal-div">
+          <div className="form-container delete-form">
+            <div className="modal-row exit-row">
+              <button onClick={handleModalClose}>X</button>
+            </div>
+            <p className="title">
+              Are you sure you want to delete {deleteForm.exercise_name}?
+            </p>
+            <p className="form-warning">
+              ALL SETS ASSOCIATED WILL BE DELETED AS WELL
+            </p>
+            <p className="form-warning">YOU CANNOT UNDO THIS ACTION!</p>
+            <div className="modal-row submit-row">
+              <button className="delete-button" onClick={handleConfirmDelete}>
+                CONFIRM
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {showEditForm && (
+        <div className="modal-div">
+          <div className="form-container edit-form">
+            <div className="modal-row  exit-row">
+              <button onClick={handleModalClose}>X</button>
+            </div>
+            <p className="title">Edit Exercise</p>
+            {errorMessage && (
+              <div className="alert alert-danger">{errorMessage}</div>
+            )}
+            {successMessage && (
+              <div className="alert alert-success">{successMessage}</div>
+            )}
+            <form className="form" onSubmit={handleSaveClick}>
+              <div className="input-group">
+                <label htmlFor="exerciseNameField">Exercise Name</label>
+                <input
+                  type="text"
+                  name="exercise_name"
+                  id="exerciseNameField"
+                  value={editForm.exercise_name}
+                  onChange={(e) => {
+                    setEditForm({
+                      exercise_name: e.target.value,
+                      exercise_id: editForm.exercise_id,
+                      is_default: 0,
+                    });
+                  }}
+                />
+                <input
+                  type="text"
+                  name="exercise_id"
+                  id="exerciseIdField"
+                  defaultValue={editForm.exercise_id}
+                />
+              </div>
+              <button className="sign" type="submit">
+                Save Changes
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      <div className="exercises-grid">
+        <div className="exercises-row">
+          <div className="exercises-column">
+            <CreateExerciseForm />
+          </div>
+          <div className="exercises-column">
+            <p className="exercises-title">All Exercises</p>
+            <ul className="exercise-list">
+              {exercises.map((exercise) => (
+                <li key={exercise.exercise_id} className="list-group-item">
+                  <p>{exercise.exercise_name}</p>
+                  {exercise.is_default == 0 && (
+                    <div>
+                      <button
+                        className="exercises-button edit"
+                        onClick={() => handleEditClick(exercise)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="exercises-button delete"
+                        onClick={() => handleDeleteClick(exercise)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  )}
+
+                  {exercise.is_default == 1 && (
+                    <div>
+                      <p className="default">default</p>
+                    </div>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </>
   );

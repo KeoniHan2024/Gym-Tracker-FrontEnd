@@ -1,0 +1,129 @@
+.exercises-grid {
+    display: flex;
+    flex-direction: column;
+    padding-top: 150px;
+  }
+
+.exercises-title {
+    padding-left: 32px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.exercises-grid ul {
+    overflow-y: auto;
+    scrollbar-width: 1px;
+    scrollbar-color: #A78BFA #111827;
+    
+    max-height: 350px;
+}
+  
+.exercises-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    max-height: 350px;
+    flex-wrap: nowrap;
+}
+
+
+.exercises-column {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.exercise-list .list-group-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border: 2px solid rgba(55, 65, 81, 1);
+    outline: 0;
+    background-color: rgba(17, 24, 39, 1);
+    padding: 0.75rem 1rem;
+    color: rgba(243, 244, 246, 1);
+    text-align: left;
+    justify-content: space-between;
+}
+
+.exercise-list p {
+    margin: 0px;
+    transition: all 1s;
+}
+
+
+.default {
+    color: rgb(83, 83, 83);
+    margin: 0px;
+}
+
+.muscle-group-search {
+    padding-left: 0;
+}
+
+
+.muscle-group-search .list-group-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border: 2px solid rgba(55, 65, 81, 1);
+    outline: 0;
+    background-color: rgba(17, 24, 39, 1);
+    padding: 0.75rem 1rem;
+    color: rgba(243, 244, 246, 1);
+    text-align: left;
+}
+
+.exercises-button {
+    border: 2px solid rgba(55, 65, 81, 1);
+    outline: 0;
+    background-color: rgba(17, 24, 39, 1);
+    padding: 0.25rem 0.5rem;
+    color: rgba(243, 244, 246, 1);
+    text-align: left;
+    margin: 2px 6px;
+    transition: all 0.4s;
+}
+
+.edit {
+   background-color: rgb(51, 39, 1);
+   border-color: rgb(153, 116, 4);
+}
+
+.edit:hover {
+   background-color: rgb(90, 69, 1);
+}
+
+
+.delete {
+    background-color: rgb(44, 4, 12);
+    border-color: rgb(132, 12, 36);
+}
+
+.delete:hover {
+    background-color: rgb(71, 6, 19);
+}
+
+
+.exercises-button:active {
+    transition: 0.2s;
+    background-color: #172035;
+    border-color: #324977;
+}
+
+
+
+@media(max-width:800px) {
+    .exercises-row {
+        display: flex;
+        flex-direction: column;
+        padding-top: 150px;
+        align-items: center;
+        row-gap: 20px;
+      }
+
+      .exercises-grid {
+        padding-top: 40%;
+      }
+}
