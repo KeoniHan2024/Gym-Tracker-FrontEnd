@@ -7,7 +7,7 @@ interface Musclegroup {
 interface Exercise {
     exercise_id: number;
     exercise_name: string;
-    is_default: number;
+    is_default?: number;
 }
 
 // interface SetType {

@@ -179,7 +179,7 @@ const CreateSetForm = () => {
                 onClick={() =>
                   handleExerciseSelection({
                     exercise_id: exercise.item.id,
-                    exercise_name: exercise.item.exercise_name,
+                    exercise_name: exercise.item.exercise_name
                   })
                 }
                 key={exercise.item.id}
