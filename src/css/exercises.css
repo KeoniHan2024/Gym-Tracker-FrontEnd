@@ -10,8 +10,9 @@
     font-weight: bold;
 }
 
-.exercises-grid ul {
-
+.exercise-list {
+    overflow-y: auto;
+    max-height: 400px;
 }
   
 .exercises-row {
