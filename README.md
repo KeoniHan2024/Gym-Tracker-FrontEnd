@@ -10,13 +10,13 @@ The Gym Tracker Frontend is a built with React and TypeScript, designed to help 
 - **Exercise History:** View your workout history showing the amount of sets, reps, and weight.
 - **Custom Exercises:** Add and track your own custom exercises to your workout routine.
 - **User Progress Tracker:**
-- Shows the average amount of weight per reps 
+  - Shows the average amount of weight per reps 
 
 ## Coming Soon / Upcoming Features
 I am currently working on these features. Stay tuned for updates!
 
 - **User Progress Tracker:**
-- Show a score for each workout day based on the users average workout
+  - Show a score for each workout day based on the users average workout
 - **Import/Export:** Import and Export .csv files with all sets and exercise names
 - **Social Sharing:** Share your achievements with friends and the community.
 - **Progressive Overload Calculator:** A tool to help you progressively increase your weights.
