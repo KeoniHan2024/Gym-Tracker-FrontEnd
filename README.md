@@ -16,7 +16,8 @@ The Gym Tracker Frontend is a built with React and TypeScript, designed to help 
 I am currently working on these features. Stay tuned for updates!
 
 - **User Progress Tracker:**
-- 
+- Show a score for each workout day based on the users average workout
+- **Import/Export:** Import and Export .csv files with all sets and exercise names
 - **Social Sharing:** Share your achievements with friends and the community.
 - **Progressive Overload Calculator:** A tool to help you progressively increase your weights.
 - **Personal Bests:**: Show the users personal bests for all their favorite exercises
