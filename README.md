@@ -3,20 +3,24 @@
 The Gym Tracker Frontend is a built with React and TypeScript, designed to help users log their gym workouts and track their progress. This app allows users to add custom exercises, view their exercise history, and track progress in terms of sets and weights lifted.
 
 ## Features
+- **Exercise Library:** A default library of exercises.
 - **Add Custom Exercises**: Users can create new exercises and track them.
 - **Responsive Design**: Built with Bootstrap for a mobile-first, responsive UI.
 - **Authentication**: Secure authentication to ensure only authorized users can add or view exercises.
+- **Exercise History:** View your workout history showing the amount of sets, reps, and weight.
+- **Custom Exercises:** Add and track your own custom exercises to your workout routine.
+- **User Progress Tracker:**
+  - Shows the average amount of weight per reps 
 
-# Coming Soon
+## Coming Soon / Upcoming Features
 I am currently working on these features. Stay tuned for updates!
 
-## Upcoming Features
-- **User Progress Tracker:** A detailed dashboard to track your gym progress over time.
-- **Exercise Library:** A growing library of exercises with instructional videos and tips.
+- **User Progress Tracker:**
+  - Show a score for each workout day based on the users average workout
+- **Import/Export:** Import and Export .csv files with all sets and exercise names
 - **Social Sharing:** Share your achievements with friends and the community.
-- **Exercise History:** View your workout history with detailed stats on sets, reps, and weights.
-- **Custom Exercises:** Add and track your own custom exercises to your workout routine.
 - **Progressive Overload Calculator:** A tool to help you progressively increase your weights.
+- **Personal Bests:**: Show the users personal bests for all their favorite exercises
 - **Nutrition Integration:** Sync with nutrition apps to track your calorie intake and macros.
 - **Weekly Challenges:** Participate in weekly challenges and compete with others.
 
