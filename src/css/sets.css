@@ -31,7 +31,7 @@
 .sets-column .list-group-item {
     display: flex;
     align-items: center;
-    width: fit-content;
+    width: 100%;
     border: 2px solid rgba(55, 65, 81, 1);
     outline: 0;
     background-color: rgba(17, 24, 39, 1);
@@ -52,6 +52,45 @@
 
 .edit {
 
+}
+
+
+.setList-Column {
+    
+}
+
+
+.hide-set {
+    display: none;
+}
+
+.show-set {
+
+}
+
+.set-text {
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.set-exercise-name {
+    font-size: 25px;
+    margin-bottom: 0px;
+}
+
+
+.set-list {
+    width: 700px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.exercise-row {
+    background-color: #11182741;
+    padding: 10px 10px;
+    border-color: #374151b7;
+    border-style: dashed;
+    border-width: 1px;
 }
 
 /* .list-group-item:hover {

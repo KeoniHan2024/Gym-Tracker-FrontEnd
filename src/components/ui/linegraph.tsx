@@ -33,7 +33,7 @@ interface WeightSet {
 
 function LineGraph({ selectedExercise }: { selectedExercise: number }) {
   const API_GET_SETS = import.meta.env.VITE_APP_API_URL?.concat(
-    "/sets/allSets"
+    "/sets/"
   ) as string;
   const [labels, setLabels] = useState<String[]>([]);
   const [data, setData] = useState<number[]>([]);
@@ -46,15 +46,12 @@ function LineGraph({ selectedExercise }: { selectedExercise: number }) {
   }>({});
   const token = localStorage.getItem("token");
 
-  const queryParams = { exercise_id: selectedExercise };
-
   // in this get request we want to return all dates and all volume. seperate by exercise type if that exists
   useEffect(() => {
     if (selectedExercise != -1) {
       axios
-        .get(API_GET_SETS, {
-          headers: { Authorization: `Bearer ${token}` },
-          params: queryParams,
+        .get(API_GET_SETS + selectedExercise, {
+          headers: { Authorization: `Bearer ${token}` }
         })
         .then((response) => {
           setSetWeights(response.data.setWeights);

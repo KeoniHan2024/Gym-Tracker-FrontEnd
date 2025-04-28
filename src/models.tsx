@@ -10,12 +10,12 @@ interface Exercise {
     is_default?: number;
 }
 
-// interface SetType {
-//     exercise_type: FormDataEntryValue,
-//     exercise_name: string,
-//     weight?: string,
-//     units: string,
-//     reps?: string,
-//     date_worked: string,
-//     notes?: string,
-// }
+interface SetType {
+    exercise_type?: string,
+    exercise_name: string,
+    weight?: string,
+    units: string,
+    reps?: string,
+    date_worked: string,
+    notes?: string,
+}
