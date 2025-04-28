@@ -190,53 +190,54 @@ function Exercises() {
       )}
 
       <div className="exercises-grid">
-        <div className="exercises-row">
+          <div className="exercises-row"><div className="page-title">EXERCISES</div></div>
+        <div className="exercises-row second-row">
           <div className="exercises-column">
             <CreateExerciseForm />
           </div>
-          <div className="exercises-column">
-            <p className="exercises-title">All Exercises</p>
-            <ul className="exercise-list">
-              {exercises.map((exercise) => (
-                <li key={exercise.exercise_id} className="list-group-item">
-                  <p>{exercise.exercise_name}</p>
-                  {exercise.is_default == 0 && (
-                    <div>
-                      <button
-                        className="exercises-button edit"
-                        onClick={() => handleEditClick(exercise)}
-                      >
-                        Edit
-                      </button>
-                      <button
-                        className="exercises-button delete"
-                        onClick={() => handleDeleteClick(exercise)}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  )}
+<div className="exercises-column">
+  <div className="muscle-group-title">Muscle Groups</div>
+  <ul className="muscle-group-list">
+    {muscleGroups?.map((muscleGroup) => (
+      <li>{muscleGroup.name}</li>
+    ))}
+  </ul>
+</div>
+</div>
+            <div className="exercises-row">
+          <div className="exercises-column second-row">
+              <p className="exercises-title">All Exercises</p>
+              <ul className="exercise-list">
+                {exercises.map((exercise) => (
+                  <li key={exercise.exercise_id} className="list-group-item">
+                    <p>{exercise.exercise_name}</p>
+                    {exercise.is_default == 0 && (
+                      <div>
+                        <button
+                          className="exercises-button edit"
+                          onClick={() => handleEditClick(exercise)}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="exercises-button delete"
+                          onClick={() => handleDeleteClick(exercise)}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    )}
+                    {exercise.is_default == 1 && (
+                      <div>
+                        <p className="default">default</p>
+                      </div>
+                    )}
+                  </li>
+                ))}
+              </ul>
+                        </div>
+            </div>
 
-                  {exercise.is_default == 1 && (
-                    <div>
-                      <p className="default">default</p>
-                    </div>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-        <div className="exercises-row">
-          <div className="exercises-column">
-            <div className="muscle-group-title">Muscle Groups</div>
-            <ul className="muscle-group-list">
-              {muscleGroups?.map((muscleGroup) => (
-                <li>{muscleGroup.name}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
       </div>
     </>
   );

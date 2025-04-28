@@ -1,7 +1,7 @@
 .exercises-grid {
     display: flex;
     flex-direction: column;
-    padding-top: 150px;
+    padding-top: 100px;
   }
 
 .exercises-title {
@@ -11,25 +11,23 @@
 }
 
 .exercises-grid ul {
-    overflow-y: auto;
-    scrollbar-width: 1px;
-    scrollbar-color: #A78BFA #111827;
-    
-    max-height: 350px;
+
 }
   
 .exercises-row {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    max-height: 350px;
     flex-wrap: nowrap;
+    padding: 0px 25px;
 }
 
 
 .exercises-column {
-    display: flex;
-    flex-direction: column;
+}
+
+.exercises-column.second-row {
+    width: 900px;
 }
 
 
@@ -115,30 +113,34 @@
 .muscle-group-title {
     font-size: 30px;
     font-weight: bold;
+    padding-left: 25px;
 }
 
 .muscle-group-list {
-    max-height: 500px;
+    overflow-y: auto;
+    scrollbar-width: 1px;
+    scrollbar-color: #A78BFA #111827;
+    
+    max-height: 300px;
 }
 
 .muscle-group-list li {
     color: rgb(162, 185, 207);
+    list-style-type: none;
+}
+
+.page-title {
+    font-size: 75px;
+    font-weight: bold;
 }
 
 
 @media(max-width:800px) {
     .exercises-row {
-        display: flex;
-        flex-direction: column;
-        padding-top: 150px;
-        align-items: center;
-        row-gap: 20px;
+        height: fit-content;
       }
 
       .exercises-grid {
-        padding-top: 40%;
+        padding-top: 20%;
       }
 }
-
-
-
