@@ -112,6 +112,18 @@
     border-color: #324977;
 }
 
+.muscle-group-title {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.muscle-group-list {
+    max-height: 500px;
+}
+
+.muscle-group-list li {
+    color: rgb(162, 185, 207);
+}
 
 
 @media(max-width:800px) {

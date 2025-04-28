@@ -6,6 +6,7 @@ import { useFetchExercises } from "../../hooks/useFetchExercises";
 import CreateExerciseForm from "../../components/ui/createExerciseForm";
 import "../../css/exercises.css";
 import { useNavigate } from "react-router-dom";
+import { fetchMuscleGroups } from "../../services/ExercisesServices";
 
 function Exercises() {
   const [errorMessage, setErrorMessage] = useState<String>("");
@@ -15,6 +16,7 @@ function Exercises() {
   const token = localStorage.getItem("token") as string;
   const [newExercises, setNewExercises] = useState(0); // keeps track of newexercises added. if new one is added it will re render the list
   const exercises = useFetchExercises(token, newExercises);
+  const [muscleGroups, setMuscleGroups] = useState<Musclegroup[]>([]);
   const [editForm, setEditForm] = useState<Exercise>({
     exercise_id: -1,
     exercise_name: "",
@@ -27,6 +29,15 @@ function Exercises() {
     exercise_name: "",
     is_default: -1,
   });
+
+  useEffect(() => {
+    const getMuscleGroups = async () => {
+      const data: Musclegroup[] = await fetchMuscleGroups();
+      setMuscleGroups(data);
+    };
+    getMuscleGroups();
+  }, []);
+
   const API_EDIT_EXERCISE = import.meta.env.VITE_APP_API_URL?.concat(
     "/exercises/edit/"
   ) as string;
@@ -212,6 +223,16 @@ function Exercises() {
                     </div>
                   )}
                 </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div className="exercises-row">
+          <div className="exercises-column">
+            <div className="muscle-group-title">Muscle Groups</div>
+            <ul className="muscle-group-list">
+              {muscleGroups?.map((muscleGroup) => (
+                <li>{muscleGroup.name}</li>
               ))}
             </ul>
           </div>
