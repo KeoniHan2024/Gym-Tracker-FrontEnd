@@ -10,8 +10,12 @@
 .dashboard-row {
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 
+.dashboard-welcome {
+    font-size: 45px;
+}
 
 
 .graph-container {

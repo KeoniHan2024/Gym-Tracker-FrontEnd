@@ -22,21 +22,20 @@ interface Set {
 function Sets() {
   const token = localStorage.getItem("token") as string;
   const [newSets, setNewSets] = useState<number>(0);
-  const days: [date: string, setsForDay: Set[]] = useFetchSets(token, newSets);
   const [expandedDate, setExpandedDate] = useState<string | null>(null);
+  const days: [date: string, setsForDay: Set[]] = useFetchSets(token, newSets);
 
   const handleDateClick = (date: string) => {
     setExpandedDate(expandedDate === date ? null : date);
   };
 
-  days.map((day) => console.log(day[1]));
   // set[0] is date
   return (
     <>
       <Header showNav={true} textColor={"white"} loggedIn={true} />
       <div className="sets-grid">
         <div className="sets-row">
-          <CreateSetForm />
+          <CreateSetForm newSets={newSets} setNewSets={setNewSets}/>
           <div className="sets-column">
             <p className="sets-header">Entered Sets</p>
             <ul className="set-list">

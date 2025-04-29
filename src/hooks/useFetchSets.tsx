@@ -14,7 +14,6 @@ export function useFetchSets(token: string, newSets:number): any {
         }).then((response) => {
             // console.log(response.data)
             setSets(Object.entries(response.data["allSets"]))
-
         }).catch(err => {  
             // localStorage.removeItem("token")
             // navigate("/login", { state: "Login Session has expired" })

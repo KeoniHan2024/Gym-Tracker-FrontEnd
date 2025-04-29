@@ -6,6 +6,7 @@ import "../../css/dashboard.css";
 
 function Dashboard() {
   const token = localStorage.getItem("token") as string;
+  const first_name = localStorage.getItem("first_name") as string;
   const [newExercises, setNewExercises] = useState<number>(0);
   const exercises = useFetchNonEmptyExercises(token, newExercises);
   const [selectedExercise, setSelectedExercise] = useState<number>(-1);
@@ -21,6 +22,7 @@ function Dashboard() {
     <>
       <Header showNav={true} textColor={"white"} loggedIn={true} />
       <div className="dashboard-grid">
+        <div className="dashboard-row"><div className="dashboard-welcome">Welcome back {first_name}!</div></div>
         <div className="dashboard-row">
           <div className="graph-container">
             Selected Exercise:

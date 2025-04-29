@@ -4,10 +4,14 @@ import { useFuzzySearchList } from "@nozbe/microfuzz/react";
 import { InputChangeEvent } from "../../types";
 import axios from "axios";
 
-const CreateSetForm = () => {
+interface ChildComponentProps {
+  newSets: number;
+  setNewSets: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const CreateSetForm: React.FC<ChildComponentProps> = ({ newSets, setNewSets }) => {
     const token = localStorage.getItem("token") as string;
     const [exercises, setExercises] = useState<Exercise[]>([]); // keeps track of exercises from the user and the default one
-    const [newSets, setNewSets] = useState(0);
     const [searchQuery, setSearchQuery] = useState("");
     const [filteredExercises, setFilteredExercises] = useState<any[]>([]);
     const [exerciseList, setExerciseList] = useState<Exercise[]>([]); // gets the list of exercises when component is mounted so that the fuzzy search can work on this
@@ -86,7 +90,7 @@ const CreateSetForm = () => {
         .then((response) => {
           setErrorMessage("");
           setsuccessMessage(response.data.message);
-          setNewSets((prev) => prev + 1); // when an exercise is created successfully wit will then update the count which the useeffect is dependent on
+          setNewSets((prev) => prev + 1); // when a set is created successfully wit will then update the count which the useeffect is dependent on
         })
         .catch((err) => {
           if (err.response) {

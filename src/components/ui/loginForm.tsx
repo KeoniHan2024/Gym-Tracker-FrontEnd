@@ -19,6 +19,7 @@ const LoginForm = () => {
         .then((response) => {
           const { token, user } = response.data;
           localStorage.setItem("token", token);
+          localStorage.setItem("first_name", user.first_name);
           // console.log("User Logged in", user);
           navigate("/Dashboard"); //TODO - CHANGE TO DASHBOARD WITH USER STATS (Protected Route)
         })
