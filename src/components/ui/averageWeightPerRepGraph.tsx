@@ -31,7 +31,7 @@ interface WeightSet {
   // Add other properties as needed
 }
 
-function LineGraph({ selectedExercise }: { selectedExercise: number }) {
+function AverageWeightPerRepGraph({ selectedExercise }: { selectedExercise: number }) {
   const API_GET_SETS = import.meta.env.VITE_APP_API_URL?.concat(
     "/sets/"
   ) as string;
@@ -209,4 +209,4 @@ function LineGraph({ selectedExercise }: { selectedExercise: number }) {
   );
 }
 
-export default LineGraph;
+export default AverageWeightPerRepGraph;

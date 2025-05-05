@@ -1,7 +1,7 @@
 import Header from "../../components/ui/header";
 import { useFetchNonEmptyExercises } from "../../hooks/useFetchExercises";
 import { useEffect, useState } from "react";
-import LineGraph from "../../components/ui/linegraph";
+import LineGraph from "../../components/ui/averageWeightPerRepGraph";
 import "../../css/dashboard.css";
 
 function Dashboard() {
