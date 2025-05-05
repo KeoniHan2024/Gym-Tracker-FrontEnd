@@ -1,0 +1,14 @@
+.settings-grid {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 250px;
+}
+
+
+.settings-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,8 +1,10 @@
 import Header from "../../components/ui/header";
 import CreateSetForm from "../../components/ui/createSetForm";
 import "../../css/sets.css";
+import "../../css/containers.css";
 import { useFetchSets } from "../../hooks/useFetchSets";
 import { useState } from "react";
+import axios from "axios";
 
 interface Set {
   date_worked: string;
@@ -25,17 +27,83 @@ function Sets() {
   const [expandedDate, setExpandedDate] = useState<string | null>(null);
   const days: [date: string, setsForDay: Set[]] = useFetchSets(token, newSets);
 
+  const [editForm, setEditForm] = useState<Exercise>({
+    exercise_id: -1,
+    exercise_name: "",
+    is_default: -1,
+  });
+  const [showEditForm, setShowEditForm] = useState<Boolean>(false);
+  const [showDeleteModal, setShowDeleteModal] = useState<Boolean>(false);
+  const [deleteForm, setDeleteForm] = useState<Exercise>({
+    exercise_id: -1,
+    exercise_name: "",
+    is_default: -1,
+  });
+
+  const [setId,setSetId] = useState<string>("");
+
+  const DELETE_SET_API = import.meta.env.VITE_APP_API_URL?.concat(
+    "/sets/"
+  ) as string;
+
   const handleDateClick = (date: string) => {
     setExpandedDate(expandedDate === date ? null : date);
   };
+
+  const handleDeleteClick = (set_id: string) => {
+    setShowDeleteModal(true);
+    setSetId(set_id);
+  }
+
+  const handleConfirmDelete = () => {
+    axios.delete(DELETE_SET_API + setId,
+      {headers: { Authorization: `Bearer ${token}` }}
+   ).then((response) => {
+     setNewSets((prev) => prev + 1)
+     setShowEditForm(false);
+      setShowDeleteModal(false);
+   }).catch((err) => {
+     if (err.response.data.message == "Token Expired") {
+       localStorage.removeItem("token");
+       // navigate("/login", { state: "Login Session has expired" });
+     }
+     // setErrorMessage(err.response.data.message);
+     // setSuccessMessage("");
+   });
+  }
+
+  const handleModalClose = () => {
+    setShowEditForm(false);
+    setShowDeleteModal(false);
+  };
+
+
 
   // set[0] is date
   return (
     <>
       <Header showNav={true} textColor={"white"} loggedIn={true} />
+      {showDeleteModal && (
+        <div className="modal-div">
+          <div className="form-container delete-form">
+            <div className="modal-row exit-row">
+              <button onClick={handleModalClose}>X</button>
+            </div>
+            <p className="title">
+              Are you sure you want to delete this Set?
+            </p>
+            <p className="form-warning">YOU CANNOT UNDO THIS ACTION!</p>
+            <div className="modal-row submit-row">
+              <button className="delete-button" onClick={handleConfirmDelete}>
+                CONFIRM
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="sets-grid">
         <div className="sets-row">
-          <CreateSetForm newSets={newSets} setNewSets={setNewSets}/>
+          <CreateSetForm newSets={newSets} setNewSets={setNewSets} />
           <div className="sets-column">
             <p className="sets-header">Entered Sets</p>
             <ul className="set-list">
@@ -65,9 +133,25 @@ function Sets() {
                           </p>
                           <ul>
                             {sets.map((set: any) => (
-                              <li className="set-text" key={set.id}>
-                                {set.reps} reps of {set.weight} lbs
-                              </li>
+                              <div className="set-text" key={set.set_id}>
+                                <div className="">
+                                  - {set.reps} reps of {set.weight} lbs
+                                </div>
+                                <div className="">
+                                  <button
+                                    className="settings-button edit"
+                                    // onClick={() => handleEditClick(exercise)}
+                                  >
+                                    Edit
+                                  </button>
+                                  <button
+                                    className="settings-button delete"
+                                    onClick={() => handleDeleteClick(set.set_id)}
+                                  >
+                                    Delete
+                                  </button>
+                                </div>
+                              </div>
                             ))}
                           </ul>
                         </div>

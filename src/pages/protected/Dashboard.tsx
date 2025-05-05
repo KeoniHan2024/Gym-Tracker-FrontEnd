@@ -22,7 +22,9 @@ function Dashboard() {
     <>
       <Header showNav={true} textColor={"white"} loggedIn={true} />
       <div className="dashboard-grid">
-        <div className="dashboard-row"><div className="dashboard-welcome">Welcome back {first_name}!</div></div>
+        <div className="dashboard-row">
+          <div className="dashboard-welcome">Welcome back {first_name}!</div>
+        </div>
         <div className="dashboard-row">
           <div className="graph-container">
             Selected Exercise:
