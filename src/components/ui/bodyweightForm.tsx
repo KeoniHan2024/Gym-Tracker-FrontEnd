@@ -73,7 +73,7 @@ const BodyWeightForm = () => {
             <label htmlFor="bodyWeightField">Units</label>
             <select name="type" id="unitsField">
               <option value="lb">lbs</option>
-              <option value="kg">kgs</option>
+              {/* <option value="kg">kgs</option> */}
             </select>
           </div>
           <div className="form-column">

@@ -240,7 +240,7 @@ const CreateSetForm: React.FC<ChildComponentProps> = ({ newSets, setNewSets }) =
                     {exerciseType == "weight" && (
                       <>
                         <option value="lbs">lbs</option>
-                        <option value="kgs">kgs</option>
+                        {/* <option value="kgs">kgs</option> */}
                       </>
                     )}
                     {exerciseType == "distance" && (

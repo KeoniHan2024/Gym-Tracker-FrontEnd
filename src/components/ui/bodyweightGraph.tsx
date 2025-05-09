@@ -50,6 +50,7 @@ function BodyweightGraph() {
 
   const options = {
     maintainAspectRatio: false,
+    tension: 0.3, // You can still use tension within segments
     plugins: {
       zoom: {
         pan: {
@@ -68,7 +69,7 @@ function BodyweightGraph() {
       },
       title: {
         display: true,
-        text: "Average Weight Over Time",
+        text: "7 Day Moving Average of Bodyweight",
         color: "white",
         font: {
           family: "Roboto Mono",
@@ -114,7 +115,7 @@ function BodyweightGraph() {
         },
         title: {
           display: true,
-          text: "Avg Weight Per Rep",
+          text: "Bodyweight",
           color: "white",
           font: {
             family: "Roboto Mono",
@@ -122,7 +123,7 @@ function BodyweightGraph() {
             weight: "bold" as const,
           },
         },
-        beginAtZero: true,
+        beginAtZero: false,
       },
     },
   };
@@ -132,7 +133,7 @@ function BodyweightGraph() {
     labels: labels,
     datasets: [
       {
-        label: "Avg weight per rep",
+        label: "7 Day Moving Average",
         data: data,
         borderColor: "white",
         pointRadius: 3,
