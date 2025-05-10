@@ -11,8 +11,8 @@ function DeleteSettingsContainer({ props }: { props: deleteSetingsProps }) {
   return (
     <>
       <div className="settings-button-container">
-        <button onClick={handleBodyweightDeleteModal}>Delete all </button>
-        <button>Import Sets</button>
+        <button onClick={handleBodyweightDeleteModal}>Delete All Bodyweights</button>
+        <button>Delete All Sets</button>
       </div>
     </>
   );

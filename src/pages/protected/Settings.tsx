@@ -12,9 +12,14 @@ const API_DELETE_BODYWEIGHTS = import.meta.env.VITE_APP_API_URL?.concat(
   "/bodyweights/"
 ) as string;
 
+const API_IMPORT_SETS = import.meta.env.VITE_APP_API_URL?.concat(
+  "/sets/import"
+) as string;
+
 function Settings() {
   const token = localStorage.getItem("token");
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const boyweightFile = useRef<HTMLInputElement>(null);
+  const setsFile = useRef<HTMLInputElement>(null);
   const [errorMessage, setErrorMessage] = useState<String>("");
   const [successMessage, setSuccessMessage] = useState<String>("");
 
@@ -23,19 +28,24 @@ function Settings() {
   const [showDeleteBWModal, setShowDeleteBWModal] = useState<Boolean>(false);
 
   //IMPORT SETS MODAL
+  const [showSetsModal, setShowSetsModal] = useState<Boolean>(false);
+  const [showDeleteSetsModal, setShowDeleteSetsModal] = useState<Boolean>(false);
 
   //FORM handlers
   const handleModalClose = () => {
     setShowBWModal(false);
     setShowDeleteBWModal(false);
+    setShowSetsModal(false);
+    setShowDeleteBWModal(false);
     setSuccessMessage("");
     setErrorMessage("");
+    
   };
   // sends file to the backend to import all bodyweight and dates
   const handleImportBodyweight = (e: FormEvent) => {
     e.preventDefault();
-    if (fileInputRef.current?.files) {
-      const file = fileInputRef.current.files[0];
+    if (boyweightFile.current?.files) {
+      const file = boyweightFile.current.files[0];
       const formData = new FormData();
       formData.append("file", file);
 
@@ -80,8 +90,36 @@ function Settings() {
       });
   };
 
-  const props = { showBWModal, setShowBWModal };
-  const deleteProps = { showDeleteBWModal, setShowDeleteBWModal };
+  const handleImportSets = (e:  FormEvent) => {
+    e.preventDefault();
+    if (setsFile.current?.files) {
+      const file = setsFile.current.files[0];
+      const formData = new FormData();
+      formData.append("file", file);
+
+      axios
+        .post(API_IMPORT_SETS, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data", // Important for file uploads
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          setErrorMessage("");
+          setSuccessMessage("Imported all sets!");
+        })
+        .catch((err) => {
+          if (err.response.data.message == "Token Expired") {
+            localStorage.removeItem("token");
+          }
+          setErrorMessage("Failed to import sets :(");
+          setSuccessMessage("");
+        });
+    }
+  }
+
+  const props = { showBWModal, setShowBWModal, showSetsModal, setShowSetsModal };
+  const deleteProps = { showDeleteBWModal, setShowDeleteBWModal, showDeleteSetsModal, setShowDeleteSetsModal };
   return (
     <>
       <Header showNav={true} textColor="white" loggedIn={true} />
@@ -100,7 +138,32 @@ function Settings() {
             <p className="title">Import bodyweights (.csv)</p>
             <form id="import-bodyweight" onSubmit={handleImportBodyweight}>
               <div className="modal-row">
-                <input id="file" type="file" accept=".csv" ref={fileInputRef} />
+                <input id="file" type="file" accept=".csv" ref={boyweightFile} />
+              </div>
+              <div className="modal-row submit-row">
+                <button className="sign" type="submit">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {props.showSetsModal && (
+        <div className="modal-div">
+          <div className="form-container">
+            {errorMessage && (
+              <div className="alert alert-danger">{errorMessage}</div>
+            )}
+            {successMessage && (
+              <div className="alert alert-success">{successMessage}</div>
+            )}
+            <div className="modal-row exit-row">
+              <button onClick={handleModalClose}>X</button>
+            </div>
+            <p className="title">Import Sets (.csv)</p>
+            <form id="import-bodyweight" onSubmit={handleImportSets}>
+              <div className="modal-row">
+                <input id="file" type="file" accept=".csv" ref={setsFile} />
               </div>
               <div className="modal-row submit-row">
                 <button className="sign" type="submit">Submit</button>

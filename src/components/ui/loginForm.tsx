@@ -15,7 +15,7 @@ const LoginForm = () => {
       const payload = Object.fromEntries(formData);
   
       axios
-        .post(import.meta.env.VITE_APP_API_URL?.concat("/users/login"), payload)
+        .get(import.meta.env.VITE_APP_API_URL?.concat("/users/login"), payload)
         .then((response) => {
           const { token, user } = response.data;
           localStorage.setItem("token", token);
