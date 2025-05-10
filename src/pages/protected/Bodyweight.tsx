@@ -1,19 +1,20 @@
 import BodyWeightForm from "../../components/ui/bodyweightForm";
 import BodyweightGraph from "../../components/ui/bodyweightGraph";
 import Header from "../../components/ui/header";
+import "../../css/bodyweights.css";
 
 function Bodyweight() {
   return (
     <>
       <Header showNav={true} textColor="white" loggedIn={true}></Header>
-      <div className="sets-grid">
-        <BodyWeightForm />
+      <div className="bodyweight-grid">
+        <div className="bodyweight-row">
+          <BodyWeightForm />
+          <div className="bodyweight-graph-container">
+            <BodyweightGraph />
+          </div>
+        </div>
       </div>
-      <div className="graph-container">
-
-      <BodyweightGraph/>
-      </div>
-
 
       {/* <div className="container d-flex flex-column flex-md-row justify-content-center align-items-center vh-100">
         <div className="col-md-5 p-4 m-4 shadow rounded bg-light ">

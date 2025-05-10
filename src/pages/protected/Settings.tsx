@@ -97,11 +97,14 @@ function Settings() {
             <div className="modal-row exit-row">
               <button onClick={handleModalClose}>X</button>
             </div>
+            <p className="title">Import bodyweights (.csv)</p>
             <form id="import-bodyweight" onSubmit={handleImportBodyweight}>
               <div className="modal-row">
                 <input id="file" type="file" accept=".csv" ref={fileInputRef} />
               </div>
-              <button type="submit">Submit</button>
+              <div className="modal-row submit-row">
+                <button className="sign" type="submit">Submit</button>
+              </div>
             </form>
           </div>
         </div>
@@ -119,13 +122,16 @@ function Settings() {
             <div className="modal-row exit-row">
               <button onClick={handleModalClose}>X</button>
             </div>
-            <div className="modal-row exit-row">
+            <p className="title">DELETE ALL BODYWEIGHTS</p>
+            <div className="modal-row">
               <p>
                 Are you sure you want to delete all bodyweights? This function
                 cannot be undone
               </p>
             </div>
-            <button onClick={handleDeleteBodyweight}>Confirm</button>
+            <div className="modal-row submit-row">
+              <button className="delete-button" onClick={handleDeleteBodyweight}>Confirm</button>
+            </div>
           </div>
         </div>
       )}
