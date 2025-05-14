@@ -45,7 +45,17 @@
 
 @media(max-width: 800px) {
     .graph-container {
-        width: 95%;
+        width: 90%;
         overflow-x: auto;
+        padding: 20px 15px;
+    }
+    .dashboard-welcome {
+        font-size: 2rem;
+        padding: 20px 15px;
+    }
+    .select-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
     }
 }

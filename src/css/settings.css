@@ -37,8 +37,8 @@
 
 /* MODAL CSS */
 
-.modal-div {
-    position: absolute;
+/* .modal-div {
+    position: fixed;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -62,7 +62,7 @@ flex-direction: row;
 
 .modal-row .submit-row {
 
-}
+} */
 
 
 .settings-button-container {

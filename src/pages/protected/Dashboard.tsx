@@ -27,18 +27,22 @@ function Dashboard() {
         </div>
         <div className="dashboard-row">
           <div className="graph-container">
-            Selected Exercise:
-            <select
-              onChange={(e) => {
-                setSelectedExercise(parseInt(e.target.value));
-              }}
-            >
-              {exercises.map((exercise) => (
-                <option value={exercise.exercise_id} key={exercise.exercise_id}>
-                  {exercise.exercise_name}
-                </option>
-              ))}
-            </select>
+            <div className="select-row">
+              <select
+                onChange={(e) => {
+                  setSelectedExercise(parseInt(e.target.value));
+                }}
+              >
+                {exercises.map((exercise) => (
+                  <option
+                    value={exercise.exercise_id}
+                    key={exercise.exercise_id}
+                  >
+                    {exercise.exercise_name}
+                  </option>
+                ))}
+              </select>
+            </div>
             <div className="graph-row">
               <LineGraph selectedExercise={selectedExercise} />
             </div>

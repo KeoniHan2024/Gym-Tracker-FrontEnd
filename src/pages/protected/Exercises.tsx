@@ -191,7 +191,7 @@ function Exercises() {
 
       <div className="exercises-grid">
         <div className="exercises-row">
-          <div className="page-title">EXERCISES</div>
+          {/* <div className="page-title">EXERCISES</div> */}
         </div>
         <div className="exercises-row second-row">
           <div className="exercises-column">

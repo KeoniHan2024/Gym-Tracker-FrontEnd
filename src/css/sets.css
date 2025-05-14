@@ -144,21 +144,32 @@
     transform: translateY(-50%);
     transition: opacity 0.2s,
     transform 0.3s;
-    
 }
 
 @media(max-width:800px) {
     .sets-row {
         display: flex;
         flex-direction: column;
-        padding-top: 150px;
+        padding-top: 2%;
         align-items: center;
         row-gap: 20px;
+        width: 90%;
       }
 
       .sets-grid {
         padding-top: 40%;
       }
+      .sets-column {
+        width: 90%;
+        padding-left: 0px;
+      }
+      .set-list {
+        width: 100%;
+    margin: 0px;
+    padding: 0px;
+    height: 400px;
+    overflow-y: auto;
+}
 }
 
 /* .list-group-item:hover {

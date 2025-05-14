@@ -59,6 +59,7 @@ function Sets() {
     axios.delete(DELETE_SET_API + setId,
       {headers: { Authorization: `Bearer ${token}` }}
    ).then((response) => {
+    console.log("test")
      setNewSets((prev) => prev + 1)
      setShowEditForm(false);
       setShowDeleteModal(false);

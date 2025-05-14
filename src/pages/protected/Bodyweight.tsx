@@ -11,7 +11,10 @@ function Bodyweight() {
         <div className="bodyweight-row">
           <BodyWeightForm />
           <div className="bodyweight-graph-container">
+            <div className="bodyweight-graph-row">
+
             <BodyweightGraph />
+            </div>
           </div>
         </div>
       </div>

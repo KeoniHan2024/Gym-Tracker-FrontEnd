@@ -139,9 +139,14 @@
 @media(max-width:800px) {
     .exercises-row {
         height: fit-content;
+        flex-direction: column;
+        row-gap: 20px;
       }
 
       .exercises-grid {
         padding-top: 20%;
       }
+      .exercises-column.second-row {
+    width: 90%;
+}
 }

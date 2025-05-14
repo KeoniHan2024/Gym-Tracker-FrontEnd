@@ -99,6 +99,7 @@
   background-color: rgba(17, 24, 39, 1);
   padding: 0.75rem 1rem;
   color: rgba(243, 244, 246, 1);
+  
 }
 
 .input-group select {
@@ -160,7 +161,7 @@
 }
 
 .modal-div {
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -234,6 +235,7 @@
   .home-grid {
     padding-top: 40%;
   }
+
 }
 
 
