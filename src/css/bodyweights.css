@@ -81,5 +81,8 @@
     .bodyweight-grid {
         padding-top: 20%;
     }
+    .bodyweight-list {
+        width: 95%;
+    }
     
 }

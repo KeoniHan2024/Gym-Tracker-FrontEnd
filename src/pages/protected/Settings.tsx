@@ -4,6 +4,7 @@ import Header from "../../components/ui/header";
 import ImportSettingsContainer from "../../components/ui/importSettingsContainer";
 import "../../css/settings.css";
 import axios from "axios";
+import ExportSettingsContainer from "../../components/ui/exportSettingsContainer";
 
 const API_IMPORT_BODYWEIGHTS = import.meta.env.VITE_APP_API_URL?.concat(
   "/bodyweights/import/"
@@ -14,6 +15,10 @@ const API_DELETE_BODYWEIGHTS = import.meta.env.VITE_APP_API_URL?.concat(
 
 const API_IMPORT_SETS = import.meta.env.VITE_APP_API_URL?.concat(
   "/sets/import"
+) as string;
+
+const API_DELETE_SETS = import.meta.env.VITE_APP_API_URL?.concat(
+  "/sets/"
 ) as string;
 
 function Settings() {
@@ -37,6 +42,7 @@ function Settings() {
     setShowDeleteBWModal(false);
     setShowSetsModal(false);
     setShowDeleteBWModal(false);
+    setShowDeleteSetsModal(false);
     setSuccessMessage("");
     setErrorMessage("");
     
@@ -118,7 +124,27 @@ function Settings() {
     }
   }
 
-  const props = { showBWModal, setShowBWModal, showSetsModal, setShowSetsModal };
+  const handleDeleteAllSets = () => {
+    axios
+      .delete(API_DELETE_SETS, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setErrorMessage("");
+        setSuccessMessage("Deleted all sets");
+      })
+      .catch((err) => {
+        if (err.response.data.message == "Token Expired") {
+          localStorage.removeItem("token");
+        }
+        setErrorMessage("Failed to delete sets");
+        setSuccessMessage("");
+      });
+  }
+
+  const props = { showBWModal, setShowBWModal, showSetsModal, setShowSetsModal, showDeleteSetsModal, setShowDeleteSetsModal };
   const deleteProps = { showDeleteBWModal, setShowDeleteBWModal, showDeleteSetsModal, setShowDeleteSetsModal };
   return (
     <>
@@ -198,6 +224,31 @@ function Settings() {
           </div>
         </div>
       )}
+      {deleteProps.showDeleteSetsModal && (
+        <div className="modal-div">
+          <div className="form-container">
+            {errorMessage && (
+              <div className="alert alert-danger">{errorMessage}</div>
+            )}
+            {successMessage && (
+              <div className="alert alert-success">{successMessage}</div>
+            )}
+            <div className="modal-row exit-row">
+              <button onClick={handleModalClose}>X</button>
+            </div>
+            <p className="title">DELETE ALL SETS</p>
+            <div className="modal-row">
+              <p>
+                Are you sure you want to delete all sets? This function
+                cannot be undone
+              </p>
+            </div>
+            <div className="modal-row submit-row">
+              <button className="delete-button" onClick={handleDeleteAllSets}>Confirm</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="settings-grid">
         <div className="settings-row">
@@ -208,6 +259,10 @@ function Settings() {
           <div className="settings-column">
             <p>Delete</p>
             <DeleteSettingsContainer props={deleteProps} />
+          </div>
+          <div className="settings-column">
+            <p>Export</p>
+            <ExportSettingsContainer props={deleteProps} />
           </div>
         </div>
       </div>

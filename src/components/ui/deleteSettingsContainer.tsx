@@ -1,6 +1,8 @@
 interface deleteSetingsProps {
   showDeleteBWModal: Boolean;
   setShowDeleteBWModal: React.Dispatch<React.SetStateAction<Boolean>>;
+  showDeleteSetsModal: Boolean;
+  setShowDeleteSetsModal: React.Dispatch<React.SetStateAction<Boolean>>
 }
 
 function DeleteSettingsContainer({ props }: { props: deleteSetingsProps }) {
@@ -8,11 +10,16 @@ function DeleteSettingsContainer({ props }: { props: deleteSetingsProps }) {
     props.setShowDeleteBWModal(!props.showDeleteBWModal);
   };
 
+  const handleSetsDeleteModal = () => {
+    props.setShowDeleteSetsModal(!props.showDeleteBWModal);
+  };
+
   return (
     <>
       <div className="settings-button-container">
         <button onClick={handleBodyweightDeleteModal}>Delete All Bodyweights</button>
-        <button>Delete All Sets</button>
+        <button onClick={handleSetsDeleteModal}>Delete All Sets (doesn't work yet)</button>
+        <button>Delete All Exercises (doesn't work yet)</button>
       </div>
     </>
   );

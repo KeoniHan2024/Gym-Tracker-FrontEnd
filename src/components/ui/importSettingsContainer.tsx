@@ -21,7 +21,8 @@ function ImportSettingsContainer({ props }: { props: importSettingsProps }) {
     <>
       <div className="settings-button-container">
         <button onClick={handleBodyweightModal}>Import Bodyweights</button>
-        <button onClick={handleSetsModal}>Import Sets</button>
+        <button onClick={handleSetsModal}>Import Sets (Doesn't work yet)</button>
+        <button onClick={handleSetsModal}>Import Exercises (Doesn't work yet)</button>
       </div>
     </>
   );
