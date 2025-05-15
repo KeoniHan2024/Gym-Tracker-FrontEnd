@@ -34,7 +34,8 @@ function Settings() {
 
   //IMPORT SETS MODAL
   const [showSetsModal, setShowSetsModal] = useState<Boolean>(false);
-  const [showDeleteSetsModal, setShowDeleteSetsModal] = useState<Boolean>(false);
+  const [showDeleteSetsModal, setShowDeleteSetsModal] =
+    useState<Boolean>(false);
 
   //FORM handlers
   const handleModalClose = () => {
@@ -45,7 +46,6 @@ function Settings() {
     setShowDeleteSetsModal(false);
     setSuccessMessage("");
     setErrorMessage("");
-    
   };
   // sends file to the backend to import all bodyweight and dates
   const handleImportBodyweight = (e: FormEvent) => {
@@ -96,7 +96,7 @@ function Settings() {
       });
   };
 
-  const handleImportSets = (e:  FormEvent) => {
+  const handleImportSets = (e: FormEvent) => {
     e.preventDefault();
     if (setsFile.current?.files) {
       const file = setsFile.current.files[0];
@@ -122,7 +122,7 @@ function Settings() {
           setSuccessMessage("");
         });
     }
-  }
+  };
 
   const handleDeleteAllSets = () => {
     axios
@@ -142,10 +142,22 @@ function Settings() {
         setErrorMessage("Failed to delete sets");
         setSuccessMessage("");
       });
-  }
+  };
 
-  const props = { showBWModal, setShowBWModal, showSetsModal, setShowSetsModal, showDeleteSetsModal, setShowDeleteSetsModal };
-  const deleteProps = { showDeleteBWModal, setShowDeleteBWModal, showDeleteSetsModal, setShowDeleteSetsModal };
+  const props = {
+    showBWModal,
+    setShowBWModal,
+    showSetsModal,
+    setShowSetsModal,
+    showDeleteSetsModal,
+    setShowDeleteSetsModal,
+  };
+  const deleteProps = {
+    showDeleteBWModal,
+    setShowDeleteBWModal,
+    showDeleteSetsModal,
+    setShowDeleteSetsModal,
+  };
   return (
     <>
       <Header showNav={true} textColor="white" loggedIn={true} />
@@ -164,10 +176,17 @@ function Settings() {
             <p className="title">Import bodyweights (.csv)</p>
             <form id="import-bodyweight" onSubmit={handleImportBodyweight}>
               <div className="modal-row">
-                <input id="file" type="file" accept=".csv" ref={boyweightFile} />
+                <input
+                  id="file"
+                  type="file"
+                  accept=".csv"
+                  ref={boyweightFile}
+                />
               </div>
               <div className="modal-row submit-row">
-                <button className="sign" type="submit">Submit</button>
+                <button className="sign" type="submit">
+                  Submit
+                </button>
               </div>
             </form>
           </div>
@@ -192,7 +211,9 @@ function Settings() {
                 <input id="file" type="file" accept=".csv" ref={setsFile} />
               </div>
               <div className="modal-row submit-row">
-                <button className="sign" type="submit">Submit</button>
+                <button className="sign" type="submit">
+                  Submit
+                </button>
               </div>
             </form>
           </div>
@@ -219,7 +240,12 @@ function Settings() {
               </p>
             </div>
             <div className="modal-row submit-row">
-              <button className="delete-button" onClick={handleDeleteBodyweight}>Confirm</button>
+              <button
+                className="delete-button"
+                onClick={handleDeleteBodyweight}
+              >
+                Confirm
+              </button>
             </div>
           </div>
         </div>
@@ -239,18 +265,23 @@ function Settings() {
             <p className="title">DELETE ALL SETS</p>
             <div className="modal-row">
               <p>
-                Are you sure you want to delete all sets? This function
-                cannot be undone
+                Are you sure you want to delete all sets? This function cannot
+                be undone
               </p>
             </div>
             <div className="modal-row submit-row">
-              <button className="delete-button" onClick={handleDeleteAllSets}>Confirm</button>
+              <button className="delete-button" onClick={handleDeleteAllSets}>
+                Confirm
+              </button>
             </div>
           </div>
         </div>
       )}
 
       <div className="settings-grid">
+        <div className="settings-row">
+          <p>Will show tutorial on how to import files in the future</p>
+        </div>
         <div className="settings-row">
           <div className="settings-column">
             <p>Import</p>
