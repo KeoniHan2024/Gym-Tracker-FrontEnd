@@ -10,24 +10,13 @@ function Bodyweight() {
       <div className="bodyweight-grid">
         <div className="bodyweight-row">
           <BodyWeightForm />
-          <div className="bodyweight-graph-container">
+          <div className="graph-container">
             <div className="bodyweight-graph-row">
-
             <BodyweightGraph />
             </div>
           </div>
         </div>
       </div>
-
-      {/* <div className="container d-flex flex-column flex-md-row justify-content-center align-items-center vh-100">
-        <div className="col-md-5 p-4 m-4 shadow rounded bg-light ">
-          <h3>INSERT WEIGHT GRAPH HERE</h3>
-          <ul
-            className="listGroup"
-            style={{ maxHeight: "300px", overflowY: "auto" }}
-          ></ul>
-        </div>
-      </div> */}
     </>
   );
 }

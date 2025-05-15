@@ -148,10 +148,10 @@ function AverageWeightPerRepGraph({ selectedExercise }: { selectedExercise: numb
         ticks: {
           color: "white",
           autoSkip: true,
-          maxTicksLimit: 10,
+          maxTicksLimit: 5,
           font: {
             family: "Roboto Mono",
-            size: 12
+            size: 9
           },
         },
         title: {
@@ -196,7 +196,7 @@ function AverageWeightPerRepGraph({ selectedExercise }: { selectedExercise: numb
         label: "Avg weight per rep",
         data: data,
         borderColor: "white",
-        pointRadius: 3,
+        pointRadius: 2,
         pointHoverRadius: 8,
       },
     ],

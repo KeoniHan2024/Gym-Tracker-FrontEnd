@@ -88,10 +88,10 @@ function BodyweightGraph() {
         ticks: {
           color: "white",
           autoSkip: true,
-          maxTicksLimit: 10,
+          maxTicksLimit: 4,
           font: {
             family: "Roboto Mono",
-            size: 12
+            size: 9
           },
         },
         title: {
@@ -136,8 +136,8 @@ function BodyweightGraph() {
         label: "7 Day Moving Average",
         data: data,
         borderColor: "white",
-        pointRadius: 3,
-        pointHoverRadius: 8,
+        pointRadius: 2,
+        pointHoverRadius: 7,
       },
     ],
   };
