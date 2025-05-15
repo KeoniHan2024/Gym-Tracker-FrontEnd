@@ -58,4 +58,7 @@
         flex-direction: row;
         justify-content: center;
     }
+    .dashboard-grid {
+        padding-top: 20%;
+    }
 }

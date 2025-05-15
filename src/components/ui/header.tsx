@@ -7,7 +7,7 @@ function Header( {showNav, textColor, loggedIn }: {showNav:boolean, textColor:st
   return (
     <>
     <div className="header-container">
-        <nav className={`navbar navbar-expand-lg bg-transparent text-${textColor}`} >
+        <nav className={`navbar navbar-expand-lg text-${textColor}`} style={{backgroundColor: "#131414"}} >
           <div className="container-fluid">
             {/* {if logged in then the logo goes to dashboard. if not logged in it goes to home page with hero on it} */}
             {!loggedIn && <a className="navbar-brand text-reset" href="/">M<span className="fs-6">uscle</span>M<span className="fs-6">ap</span></a>}

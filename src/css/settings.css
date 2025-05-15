@@ -122,4 +122,7 @@ display: block;
     background-color: #151e31;
     border-radius: 16px;
 }
+.settings-grid  {
+    padding-top: 20%;
+}
 }
