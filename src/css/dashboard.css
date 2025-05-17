@@ -4,6 +4,7 @@
     flex-direction: column;
     justify-content: space-between;
     padding-top: 250px;
+    row-gap: 30px;
 }
 
 
@@ -43,6 +44,44 @@
 }
 
 
+.maxes-list {
+    overflow-y: auto;
+    scrollbar-width: 1px;
+    scrollbar-color: #A78BFA #111827;
+    max-height: 300px;
+    width: 700px;
+    padding-left: 0px;
+}
+.Maxes-Title {
+    font-size: 32px;
+}
+
+.maxes-container {
+}
+
+.exercise-name-container {
+    font-size: 22px;
+    color: lightblue;
+}
+
+
+.maxes-list .list-group-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border: 2px solid rgba(55, 65, 81, 1);
+    outline: 0;
+    background-color: rgba(17, 24, 39, 1);
+    padding: 0.75rem 1rem;
+    color: rgba(243, 244, 246, 1);
+    text-align: left;
+    justify-content: space-between;
+}
+.maxes-list li {
+    color: rgb(162, 185, 207);
+    list-style-type: none;
+}
+
 @media(max-width: 800px) {
     .graph-container {
         width: 90%;
@@ -60,5 +99,8 @@
     }
     .dashboard-grid {
         padding-top: 20%;
+    }
+    .maxes-list {
+        width: 90%;
     }
 }

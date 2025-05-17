@@ -33,7 +33,7 @@ interface WeightSet {
 
 function AverageWeightPerRepGraph({ selectedExercise }: { selectedExercise: number }) {
   const API_GET_SETS = import.meta.env.VITE_APP_API_URL?.concat(
-    "/sets/"
+    "/sets/getSets/"
   ) as string;
   const [labels, setLabels] = useState<String[]>([]);
   const [data, setData] = useState<number[]>([]);

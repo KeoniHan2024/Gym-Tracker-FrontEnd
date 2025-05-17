@@ -3,6 +3,7 @@ import { useFetchNonEmptyExercises } from "../../hooks/useFetchExercises";
 import { useEffect, useState } from "react";
 import LineGraph from "../../components/ui/averageWeightPerRepGraph";
 import "../../css/dashboard.css";
+import MaxesContainer from "../../components/ui/maxesContainer";
 
 function Dashboard() {
   const token = localStorage.getItem("token") as string;
@@ -48,6 +49,14 @@ function Dashboard() {
             </div>
           </div>
         </div>
+        
+        <div className="dashboard-row">
+    <div className="Maxes-Title">Current Maxes by Weight</div>
+          </div>
+        <div className="dashboard-row">
+          <MaxesContainer />
+        </div>
+        <div className="dasboard-row"></div>
       </div>
     </>
   );
