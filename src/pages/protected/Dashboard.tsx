@@ -23,8 +23,10 @@ function Dashboard() {
     <>
       <Header showNav={true} textColor={"white"} loggedIn={true} />
       <div className="dashboard-grid">
-        <div className="dashboard-row">
-          <div className="dashboard-welcome">Welcome back {first_name}!</div>
+        <div className="dashboard-column">
+          <div className="dashboard-row">
+            <div className="dashboard-welcome">Welcome back {first_name}!</div>
+          
         </div>
         <div className="dashboard-row">
           <div className="graph-container">
@@ -49,14 +51,15 @@ function Dashboard() {
             </div>
           </div>
         </div>
-        
+        </div>
+        <div className="dashboard-column">
         <div className="dashboard-row">
-    <div className="Maxes-Title">Current Maxes by Weight</div>
+          <div className="maxes-title">Current Maxes by Weight</div>
           </div>
         <div className="dashboard-row">
           <MaxesContainer />
         </div>
-        <div className="dasboard-row"></div>
+        </div>
       </div>
     </>
   );

@@ -1,9 +1,9 @@
 
 .dashboard-grid {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
-    padding-top: 250px;
+    padding-top: 8%;
     row-gap: 30px;
 }
 
@@ -11,6 +11,12 @@
 .dashboard-row {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+}
+
+.dashboard-column {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 
@@ -48,11 +54,12 @@
     overflow-y: auto;
     scrollbar-width: 1px;
     scrollbar-color: #A78BFA #111827;
-    max-height: 300px;
+    max-height: 500px;
     width: 700px;
     padding-left: 0px;
 }
-.Maxes-Title {
+.maxes-title {
+    text-align: center;
     font-size: 32px;
 }
 
@@ -100,8 +107,16 @@
     }
     .dashboard-grid {
         padding-top: 20%;
+        flex-direction: column;
     }
     .maxes-list {
         width: 90%;
+        max-height: 300px;
     }
+    .maxes-title {
+        text-align: center;
+        font-size: 29px;
+        width: 90%;
+    }
+    
 }
