@@ -60,6 +60,7 @@
 }
 
 .exercise-name-container {
+    width: 200px;
     font-size: 22px;
     color: lightblue;
 }
