@@ -34,6 +34,7 @@ function MaxesContainer() {
                 month: "long",
                 day: "numeric",
                 year: "numeric",
+                timeZone: "UTC"
               }
             ),
           })
@@ -41,7 +42,6 @@ function MaxesContainer() {
         setMaxes(formattedMaxes);
       })
       .catch((err) => {
-        // localStorage.removeItem("token")
       });
   }, []);
 
