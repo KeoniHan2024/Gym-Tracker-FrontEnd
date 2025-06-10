@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 const API_GET_MAXES = import.meta.env.VITE_APP_API_URL?.concat(
-  "/sets/getMaxes"
+  "/sets/getMaxes/"
 ) as string;
 
 const token = localStorage.getItem("token");
@@ -16,12 +16,13 @@ interface maxObject {
   formattedDate?: string;
 }
 
-function MaxesContainer() {
+function MaxesContainer({ selectedExercise }: { selectedExercise: number }) {
   const [maxes, setMaxes] = useState<maxObject[]>([]);
+  console.log(selectedExercise)
 
   useEffect(() => {
     axios
-      .get(API_GET_MAXES, {
+      .get(API_GET_MAXES + selectedExercise, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -43,7 +44,7 @@ function MaxesContainer() {
       })
       .catch((err) => {
       });
-  }, []);
+  }, [selectedExercise]);
 
   return (
     <>

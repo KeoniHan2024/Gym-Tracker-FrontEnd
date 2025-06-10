@@ -30,7 +30,6 @@ function Dashboard() {
         </div>
         <div className="dashboard-row">
           <div className="graph-container">
-            <div className="select-row">
               <select
                 onChange={(e) => {
                   setSelectedExercise(parseInt(e.target.value));
@@ -45,6 +44,7 @@ function Dashboard() {
                   </option>
                 ))}
               </select>
+            <div className="select-row">
             </div>
             <div className="graph-row">
               <LineGraph selectedExercise={selectedExercise} />
@@ -54,10 +54,10 @@ function Dashboard() {
         </div>
         <div className="dashboard-column">
         <div className="dashboard-row">
-          <div className="maxes-title">Current Maxes by Weight</div>
+          <div className="maxes-title">Current Max by Weight</div>
           </div>
         <div className="dashboard-row">
-          <MaxesContainer />
+          <MaxesContainer selectedExercise = {selectedExercise}/>
         </div>
         </div>
       </div>
